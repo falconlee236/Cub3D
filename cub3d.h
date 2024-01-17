@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/17 15:15:05 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:42:28 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./mlx/mlx.h"
+# define PI 3.14159265
 
 //SECTION Vector struct
 typedef struct s_vec{
