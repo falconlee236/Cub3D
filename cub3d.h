@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/17 16:25:58 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:44:36 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "./libft/libft.h"
 # include "./mlx/mlx.h"
 # define PI 3.14159265
+# define FOV -0.5
+# define INF 1.7976931348623157E+308
 # define X_EVENT_KEY_PRESS			2
 # define X_EVENT_KEY_RELEASE		3
 # define ON_DESTROY 				17
