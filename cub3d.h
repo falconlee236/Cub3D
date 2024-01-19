@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/18 15:44:36 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:50:48 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,15 @@ typedef struct s_screen{
 	t_vec	origin;
 	t_vec	dir;
 	t_vec	plane;
+	double	movespeed;
+	double	rotspeed;
 }	t_screen;
+
+//ANCHOR - Vector operation
+t_vec	vec_new(double x, double y);
+t_vec	vec_add(t_vec a, t_vec b);
+t_vec	vec_sub(t_vec a, t_vec b);
+t_vec	vec_mul(t_vec a, double c);
+t_vec	get_dir_vec(t_vec a, t_vec b, double x, double y);
+t_vec	vec_rot(t_vec a, int theta);
 #endif
