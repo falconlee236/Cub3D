@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/19 21:48:26 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/19 22:05:18 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,10 @@ int	main_loop(t_screen *s)
 			}
 			if (g_worldmap[map_x][map_y] > 0) hit = 1;
 		}
+		if (side == 0)
+			prep_wall_dist = (map_x - deltadist_x + (1 - step_x) / 2) / raydir.x;
+		else
+			prep_wall_dist = (map_y - deltadist_y + (1 - step_y) / 2) / raydir.y;
 	}
 	return (0);
 }
