@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/19 17:50:48 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:03:09 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_screen{
 	double	dist;
 	t_ray	*ray;
 	t_img	img;
-	t_vec	origin;
+	t_vec	pos;
 	t_vec	dir;
 	t_vec	plane;
 	double	movespeed;
