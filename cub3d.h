@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/20 17:03:09 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:49:16 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ typedef struct s_img{
 	unsigned int	*addr;
 }	t_img;
 
-typedef struct s_pixel{
-	double			dist;
-	unsigned int	*color;
-}	t_pixel;
-
 typedef struct s_ray{
 	t_vec	dir;
 	double	dist;
@@ -59,19 +54,18 @@ typedef struct s_ray{
 typedef struct s_screen{
 	void	*mlx;
 	void	*win;
-	t_pixel	**pixel;
+	int		**buf;
+	int		**texture;
+	double	movespeed;
+	double	rotspeed;
 	int		w;
 	int		h;
-	double	sin_unit;
-	double	cos_unit;
-	double	dist;
+	int		re_buf;
 	t_ray	*ray;
 	t_img	img;
 	t_vec	pos;
 	t_vec	dir;
 	t_vec	plane;
-	double	movespeed;
-	double	rotspeed;
 }	t_screen;
 
 //ANCHOR - Vector operation

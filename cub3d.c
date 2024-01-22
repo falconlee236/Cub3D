@@ -6,11 +6,13 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/21 20:26:33 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:04:01 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#define texWidth 64
+#define texHeight 64
 
 int	g_worldmap[24][24] = {
 	{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
@@ -51,58 +53,67 @@ int	destory_hook_event(t_screen *s)
 	exit(1);
 }
 
-t_pixel	**init_pixel(int w, int h, t_img *img)
+void	load_image(t_screen *s, int *texture, char *path, t_img *img)
 {
-	t_pixel	**pixel;
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
-	pixel = (t_pixel **)malloc(sizeof(t_pixel *) * w);
-	x = -1;
-	while (++x < w)
+	img->ptr = mlx_xpm_file_to_image(s->mlx, path, &img->w, &img->h);
+	img->addr = (unsigned int*)mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
+	y = -1;
+	while (++y < img->h)
 	{
-		pixel[x] = (t_pixel *)malloc(sizeof(t_pixel) * h);
-		y = -1;
-		while (++y < h)
-		{
-			pixel[x][y].dist = INF;
-			pixel[x][y].color = (unsigned int *)((char *)img->addr
-					+ img->size_line * y + img->bits_per_pixel / 8 * x);
-		}
+		x = -1;
+		while (++x < img->w)
+			texture[img->w * y + x] = img->addr[img->w * y + x];
 	}
-	return (pixel);
+	mlx_destroy_image(s->mlx, img->ptr);
+}
+
+void	load_texture(t_screen *s)
+{
+	t_img	img;
+
+	load_image(s, s->texture[0], "textures/eagle.xpm", &img);
+	load_image(s, s->texture[1], "textures/redbrick.xpm", &img);
+	load_image(s, s->texture[2], "textures/purplestone.xpm", &img);
+	load_image(s, s->texture[3], "textures/greystone.xpm", &img);
+	load_image(s, s->texture[4], "textures/bluestone.xpm", &img);
+	load_image(s, s->texture[5], "textures/mossy.xpm", &img);
+	load_image(s, s->texture[6], "textures/wood.xpm", &img);
+	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
 }
 
 void	init_struct(t_screen *s)
 {
-	s->w = 640;
-	s->h = 480;
+	int	x;
+
+	x = -1;
+	s->w = 1280;
+	s->h = 760;
+	s->re_buf = 0;
 	s->mlx = mlx_init();
 	s->win = mlx_new_window(s->mlx, s->w, s->h, "cub3D");
 	s->img.ptr = mlx_new_image(s->mlx, s->w, s->h);
-	s->img.addr = (unsigned int *)mlx_get_data_addr(s->img.ptr,
-			&(s->img.bits_per_pixel), &(s->img.size_line), &(s->img.endian));
-	s->dist = (s->w / 2) * (1 / tan(FOV / 2));
-	s->pixel = init_pixel(s->w, s->h, &s->img);
-	//s->ray = (t_ray *)malloc(sizeof(t_ray) * s->w);
-	s->pos = vec_new(12, 5);
+	s->img.addr = (unsigned int*)mlx_get_data_addr(s->img.ptr, &s->img.bits_per_pixel, &s->img.size_line, &s->img.endian);
+	s->buf = (int **)malloc(sizeof(int *) * (s->h));
+	while (++x < s->h)
+		s->buf[x] = (int *)malloc(sizeof(int) * (s->w));
+	s->texture = (int **)malloc(sizeof(int *) * 8);
+	x = -1;
+	while (++x < 8)
+		s->texture[x] = (int *)malloc(sizeof(int) * (texWidth * texHeight));
+	load_texture(s);
+	s->pos = vec_new(22, 11.5);
 	s->dir = vec_new(-1, 0);
 	s->plane = vec_new(0, 0.66);
-	s->movespeed = 0.05;
-	s->rotspeed = 0.05;
-	s->sin_unit = 0;
-	s->cos_unit = 0;
-}
-
-void	ver_line(t_screen *s, int idx, int draw_start, int draw_end, int color)
-{
-	while (draw_start <= draw_end)
-		mlx_pixel_put(s->mlx, s->win, idx, draw_start++, color);
+	s->movespeed = 0.1;
+	s->rotspeed = 5;
 }
 
 int	main_loop(t_screen *s)
 {
-	int		idx;
+	int		x;
 	double	camerax;
 	t_vec	raydir;
 	int		map_x;
@@ -120,12 +131,24 @@ int	main_loop(t_screen *s)
 	int		draw_start;
 	int		draw_end;
 	int		color;
+	int		i;
+	int		j;
 
-	idx = 0;
-	while (idx < s->w)
+	x = 0;
+	if (s->re_buf == 1)
+	{
+		i = -1;
+		while (++i < s->h)
+		{
+			j = -1;
+			while (++j < s->w)
+				s->buf[i][j] = 0;
+		}
+	}
+	while (x < s->w)
 	{
 		hit = 0;
-		camerax = 2 * idx / (double)s->w - 1;
+		camerax = 2 * x / (double)s->w - 1;
 		raydir = vec_add(s->dir, vec_mul(s->plane, camerax));
 		map_x = (int)s->pos.x;
 		map_y = (int)s->pos.y;
@@ -178,22 +201,40 @@ int	main_loop(t_screen *s)
 		draw_end = lineheight / 2 + s->h / 2;
 		if (draw_end >= s->h)
 			draw_end = s->h - 1;
-		if (g_worldmap[map_x][map_y] == 1)
-			color = 0xFF0000;
-		else if (g_worldmap[map_x][map_y] == 2)
-			color = 0x00FF00;
-		else if (g_worldmap[map_x][map_y] == 3)
-			color = 0x0000FF;
-		else if (g_worldmap[map_x][map_y] == 4)
-			color = 0xFFFFFF;
+		int	textnum = g_worldmap[map_x][map_y];
+		// int	textnum = g_worldmap[map_x][map_y] - 1;
+		double wall_x;
+		if (side == 0)
+			wall_x = s->pos.y + prep_wall_dist * raydir.y;
 		else
-			color = 0xFFFF00;
-		if (side == 1)
-			color = color / 2;
-		ver_line(s, idx, draw_start, draw_end, color);
-		idx++;
+			wall_x = s->pos.x + prep_wall_dist * raydir.x;
+		wall_x -= floor(wall_x);
+		int	text_x = (int)(wall_x * (double)texWidth);
+		if ((side == 0 && raydir.x > 0) || (side == 1 && raydir.y < 0))
+			text_x = texWidth - text_x - 1;
+		double step = 1.0 * texHeight / lineheight;
+		//starting texture coordinate
+		double text_pos = (draw_start - s->h / 2 + lineheight / 2) * step;
+		int	y;
+		y = draw_start;
+		while (y < draw_end)
+		{
+			int	text_y = (int)text_pos & (texHeight - 1);
+			text_pos += step;
+			color = s->texture[textnum][texHeight * text_y + text_x];
+			if (side == 1)
+				color = (color >> 1) & 8355711;
+			s->buf[y][x] = color;
+			s->re_buf = 1;
+			y++;
+		}
+		x++;
 	}
-	mlx_clear_window(s->mlx, s->win);
+	for(int y = 0; y < s->h; y++){
+		for(int x = 0; x < s->w; x++)
+			s->img.addr[y * s->w + x] = s->buf[y][x];
+	}
+	mlx_put_image_to_window(s->mlx, s->win, s->img.ptr, 0, 0);
 	return (0);
 }
 
@@ -215,16 +256,18 @@ int	key_hook_event(int key, t_screen *s)
 	}
 	if (key == KEY_D)
 	{
-		s->dir = vec_rot(s->dir, -1);
-		s->plane = vec_rot(s->plane, -1);
+		s->dir = vec_rot(s->dir, -s->rotspeed);
+		s->plane = vec_rot(s->plane, -s->rotspeed);
 	}
 	if (key == KEY_A)
 	{
-		s->dir = vec_rot(s->dir, 1);
-		s->plane = vec_rot(s->plane, 1);
+		s->dir = vec_rot(s->dir, s->rotspeed);
+		s->plane = vec_rot(s->plane, s->rotspeed);
 	}
 	if (key == KEY_ESC)
 		exit(0);
+	mlx_clear_window(s->mlx, s->win);
+	main_loop(s);
 	return (0);
 }
 
