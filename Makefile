@@ -1,7 +1,7 @@
 NAME=cub3D
 CFLAGS=cc -Wall -Wextra -Werror -o
 
-SRCS=cub3d.c $(wildcard vector/*.c)
+SRCS=cub3d.c key_hook_event.c $(wildcard vector/*.c)
 
 all: $(NAME)
 

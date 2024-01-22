@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/22 19:04:01 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:23:29 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,9 @@ int	g_worldmap[24][24] = {
   	{4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3}
 };
 
-
 void	leak_check(void)
 {
 	system("leaks cub3D");
-}
-
-int	destory_hook_event(t_screen *s)
-{
-	mlx_destroy_window(s->mlx, s->win);
-	exit(1);
 }
 
 void	load_image(t_screen *s, int *texture, char *path, t_img *img)
@@ -235,39 +228,6 @@ int	main_loop(t_screen *s)
 			s->img.addr[y * s->w + x] = s->buf[y][x];
 	}
 	mlx_put_image_to_window(s->mlx, s->win, s->img.ptr, 0, 0);
-	return (0);
-}
-
-int	key_hook_event(int key, t_screen *s)
-{
-	if (key == KEY_W)
-	{
-		if (!g_worldmap[(int)(s->pos.x + s->dir.x * s->movespeed)][(int)(s->pos.y)])
-			s->pos.x += s->dir.x * s->movespeed;
-		if (!g_worldmap[(int)(s->pos.x)][(int)(s->pos.y + s->dir.y * s->movespeed)])
-			s->pos.y += s->dir.y * s->movespeed;
-	}
-	if (key == KEY_S)
-	{
-		if (!g_worldmap[(int)(s->pos.x - s->dir.x * s->movespeed)][(int)(s->pos.y)])
-			s->pos.x -= s->dir.x * s->movespeed;
-		if (!g_worldmap[(int)(s->pos.x)][(int)(s->pos.y - s->dir.y * s->movespeed)])
-			s->pos.y -= s->dir.y * s->movespeed;
-	}
-	if (key == KEY_D)
-	{
-		s->dir = vec_rot(s->dir, -s->rotspeed);
-		s->plane = vec_rot(s->plane, -s->rotspeed);
-	}
-	if (key == KEY_A)
-	{
-		s->dir = vec_rot(s->dir, s->rotspeed);
-		s->plane = vec_rot(s->plane, s->rotspeed);
-	}
-	if (key == KEY_ESC)
-		exit(0);
-	mlx_clear_window(s->mlx, s->win);
-	main_loop(s);
 	return (0);
 }
 

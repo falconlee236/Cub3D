@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/22 16:49:16 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:23:26 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,11 @@ t_vec	vec_sub(t_vec a, t_vec b);
 t_vec	vec_mul(t_vec a, double c);
 t_vec	get_dir_vec(t_vec a, t_vec b, double x, double y);
 t_vec	vec_rot(t_vec a, int theta);
+
+//ANCHOR - Key hook event
+int		key_hook_event(int key, t_screen *s);
+int		destory_hook_event(t_screen *s);
+
+//ANCHOR - Main loop
+int		main_loop(t_screen *s);
 #endif
