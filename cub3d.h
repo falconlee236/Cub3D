@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/22 19:23:26 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:16:48 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include "./libft/libft.h"
 # include "./mlx/mlx.h"
 # define PI 3.14159265
-# define FOV -0.5
-# define INF 1.7976931348623157E+308
 # define X_EVENT_KEY_PRESS			2
 # define X_EVENT_KEY_RELEASE		3
 # define ON_DESTROY 				17
@@ -29,6 +27,11 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+
+# define TEX_W 64
+# define TEX_H 64
+# define SCREEN_W 1280
+# define SCREEN_H 760
 
 //SECTION Vector struct
 typedef struct s_vec{
@@ -58,8 +61,6 @@ typedef struct s_screen{
 	int		**texture;
 	double	movespeed;
 	double	rotspeed;
-	int		w;
-	int		h;
 	int		re_buf;
 	t_ray	*ray;
 	t_img	img;
