@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/24 12:28:50 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/01/24 13:25:08 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,29 @@
 //!SECTION
 
 //SECTION Vector operation
+# define PI 3.14159265
+
 typedef struct s_vec{
 	double	x;
 	double	y;
 }	t_vec;
-# define PI 3.14159265
 //!SECTION
+
+//SECTION - POS struct (integer vector)
+typedef struct s_pos{
+	int	x;
+	int	y;
+}	t_pos;
+//!SECTION
+
+//SECTION - Ray casting struct
+typedef struct s_raycast_info{
+	t_vec	raydir;
+	t_vec	deltadist;
+	t_vec	sidedist;
+	t_pos	map_pos;
+	t_pos	step_size;
+}	t_raycast_info;
 
 typedef struct s_img{
 	int				w;
@@ -54,11 +71,6 @@ typedef struct s_img{
 	unsigned int	*addr;
 }	t_img;
 
-typedef struct s_ray{
-	t_vec	dir;
-	double	dist;
-}	t_ray;
-
 typedef struct s_screen{
 	void	*mlx;
 	void	*win;
@@ -67,7 +79,6 @@ typedef struct s_screen{
 	double	movespeed;
 	double	rotspeed;
 	int		re_buf;
-	t_ray	*ray;
 	t_img	img;
 	t_vec	pos;
 	t_vec	dir;

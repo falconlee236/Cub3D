@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/01/24 12:44:15 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/01/24 13:27:33 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,53 @@ void	clear_buffer(t_screen *s)
 	}
 }
 
+t_pos	pos_new(int x, int y)
+{
+	t_pos	res;
+
+	res.x = x;
+	res.y = y;
+	return (res);
+}
+
+void	init_raycast(t_screen *s, t_raycast_info *info)
+{
+	if (info->raydir.x < 0)
+	{
+		info->step_size.x = -1;
+		info->sidedist.x = (s->pos.x - info->map_pos.x) * info->deltadist.x;
+	}
+	else
+	{
+		info->step_size.x = 1;
+		info->sidedist.x = (
+				info->map_pos.x + 1.0 - s->pos.x) * info->deltadist.x;
+	}
+	if (info->raydir.y < 0)
+	{
+		info->step_size.y = -1;
+		info->sidedist.y = (s->pos.y - info->map_pos.y) * info->deltadist.y;
+	}
+	else
+	{
+		info->step_size.y = 1;
+		info->sidedist.y = (
+				info->map_pos.y + 1.0 - s->pos.y) * info->deltadist.y;
+	}
+}
+
 int	main_loop(t_screen *s)
 {
-	int		x;
-	double	camerax;
-	t_vec	raydir;
-	t_vec	deltadist;
-	t_vec	sidedist;
-	int		map_x;
-	int		map_y;
-	double	prep_wall_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		lineheight;
-	int		draw_start;
-	int		draw_end;
-	int		color;
+	int				x;
+	double			camera_x;
+	int				hit;
+	t_raycast_info	info;
+	double			prep_wall_dist;
+	int				side;
+	int				lineheight;
+	int				draw_start;
+	int				draw_end;
+	int				color;
 
 	if (s->re_buf == 1)
 		clear_buffer(s);
@@ -53,52 +82,33 @@ int	main_loop(t_screen *s)
 	while (x < SCREEN_W)
 	{
 		hit = 0;
-		camerax = 2 * x / (double)SCREEN_W - 1;
-		raydir = vec_add(s->dir, vec_mul(s->plane, camerax));
-		map_x = (int)s->pos.x;
-		map_y = (int)s->pos.y;
-		deltadist = vec_new(fabs(1 / raydir.x), fabs(1 / raydir.y));
-		if (raydir.x < 0)
-		{
-			step_x = -1;
-			sidedist.x = (s->pos.x - map_x) * deltadist.x;
-		}
-		else
-		{
-			step_x = 1;
-			sidedist.x = (map_x + 1.0 - s->pos.x) * deltadist.x;
-		}
-		if (raydir.y < 0)
-		{
-			step_y = -1;
-			sidedist.y = (s->pos.y - map_y) * deltadist.y;
-		}
-		else
-		{
-			step_y = 1;
-			sidedist.y = (map_y + 1.0 - s->pos.y) * deltadist.y;
-		}
+		camera_x = 2 * x / (double)SCREEN_W - 1;
+		info.raydir = vec_add(s->dir, vec_mul(s->plane, camera_x));
+		info.map_pos = pos_new((int)s->pos.x, (int)s->pos.y);
+		info.deltadist = vec_new(
+				fabs(1 / info.raydir.x), fabs(1 / info.raydir.y));
+		init_raycast(s, &info);
 		while (hit == 0)
 		{
-			if (sidedist.x < sidedist.y)
+			if (info.sidedist.x < info.sidedist.y)
 			{
-				map_x += step_x;
-				sidedist.x += deltadist.x;
+				info.map_pos.x += info.step_size.x;
+				info.sidedist.x += info.deltadist.x;
 				side = 0;
 			}
 			else
 			{
-				map_y += step_y;
-				sidedist.y += deltadist.y;
+				info.map_pos.y += info.step_size.y;
+				info.sidedist.y += info.deltadist.y;
 				side = 1;
 			}
-			if (g_worldmap[map_x][map_y] > 0)
+			if (g_worldmap[info.map_pos.x][info.map_pos.y] > 0)
 				hit = 1;
 		}
 		if (side == 0)
-			prep_wall_dist = (map_x - s->pos.x + (1 - step_x) / 2) / raydir.x;
+			prep_wall_dist = (info.map_pos.x - s->pos.x + (1 - info.step_size.x) / 2) / info.raydir.x;
 		else
-			prep_wall_dist = (map_y - s->pos.y + (1 - step_y) / 2) / raydir.y;
+			prep_wall_dist = (info.map_pos.y - s->pos.y + (1 - info.step_size.y) / 2) / info.raydir.y;
 		lineheight = (int)(SCREEN_H / prep_wall_dist);
 		draw_start = -lineheight / 2 + SCREEN_H / 2;
 		if (draw_start < 0)
@@ -106,16 +116,16 @@ int	main_loop(t_screen *s)
 		draw_end = lineheight / 2 + SCREEN_H / 2;
 		if (draw_end >= SCREEN_H)
 			draw_end = SCREEN_H - 1;
-		int	textnum = g_worldmap[map_x][map_y];
-		// int	textnum = g_worldmap[map_x][map_y] - 1;
+		int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y];
+		// int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
 		double wall_x;
 		if (side == 0)
-			wall_x = s->pos.y + prep_wall_dist * raydir.y;
+			wall_x = s->pos.y + prep_wall_dist * info.raydir.y;
 		else
-			wall_x = s->pos.x + prep_wall_dist * raydir.x;
+			wall_x = s->pos.x + prep_wall_dist * info.raydir.x;
 		wall_x -= floor(wall_x);
 		int	text_x = (int)(wall_x * (double)TEX_W);
-		if ((side == 0 && raydir.x > 0) || (side == 1 && raydir.y < 0))
+		if ((side == 0 && info.raydir.x > 0) || (side == 1 && info.raydir.y < 0))
 			text_x = TEX_W - text_x - 1;
 		double step = 1.0 * TEX_H / lineheight;
 		//starting texture coordinate
