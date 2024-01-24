@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/01/24 12:41:22 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/01/24 12:44:15 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ int	main_loop(t_screen *s)
 	double	camerax;
 	t_vec	raydir;
 	t_vec	deltadist;
-	//t_vec	sidedist;
+	t_vec	sidedist;
 	int		map_x;
 	int		map_y;
-	double	sidedist_x;
-	double	sidedist_y;
 	double	prep_wall_dist;
 	int		step_x;
 	int		step_y;
@@ -63,35 +61,35 @@ int	main_loop(t_screen *s)
 		if (raydir.x < 0)
 		{
 			step_x = -1;
-			sidedist_x = (s->pos.x - map_x) * deltadist.x;
+			sidedist.x = (s->pos.x - map_x) * deltadist.x;
 		}
 		else
 		{
 			step_x = 1;
-			sidedist_x = (map_x + 1.0 - s->pos.x) * deltadist.x;
+			sidedist.x = (map_x + 1.0 - s->pos.x) * deltadist.x;
 		}
 		if (raydir.y < 0)
 		{
 			step_y = -1;
-			sidedist_y = (s->pos.y - map_y) * deltadist.y;
+			sidedist.y = (s->pos.y - map_y) * deltadist.y;
 		}
 		else
 		{
 			step_y = 1;
-			sidedist_y = (map_y + 1.0 - s->pos.y) * deltadist.y;
+			sidedist.y = (map_y + 1.0 - s->pos.y) * deltadist.y;
 		}
 		while (hit == 0)
 		{
-			if (sidedist_x < sidedist_y)
+			if (sidedist.x < sidedist.y)
 			{
 				map_x += step_x;
-				sidedist_x += deltadist.x;
+				sidedist.x += deltadist.x;
 				side = 0;
 			}
 			else
 			{
 				map_y += step_y;
-				sidedist_y += deltadist.y;
+				sidedist.y += deltadist.y;
 				side = 1;
 			}
 			if (g_worldmap[map_x][map_y] > 0)
