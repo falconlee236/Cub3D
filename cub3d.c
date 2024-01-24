@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/22 19:23:29 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:25:41 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#define texWidth 64
-#define texHeight 64
 
 int	g_worldmap[24][24] = {
 	{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
@@ -46,64 +44,6 @@ void	leak_check(void)
 	system("leaks cub3D");
 }
 
-void	load_image(t_screen *s, int *texture, char *path, t_img *img)
-{
-	int	x;
-	int	y;
-
-	img->ptr = mlx_xpm_file_to_image(s->mlx, path, &img->w, &img->h);
-	img->addr = (unsigned int*)mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
-	y = -1;
-	while (++y < img->h)
-	{
-		x = -1;
-		while (++x < img->w)
-			texture[img->w * y + x] = img->addr[img->w * y + x];
-	}
-	mlx_destroy_image(s->mlx, img->ptr);
-}
-
-void	load_texture(t_screen *s)
-{
-	t_img	img;
-
-	load_image(s, s->texture[0], "textures/eagle.xpm", &img);
-	load_image(s, s->texture[1], "textures/redbrick.xpm", &img);
-	load_image(s, s->texture[2], "textures/purplestone.xpm", &img);
-	load_image(s, s->texture[3], "textures/greystone.xpm", &img);
-	load_image(s, s->texture[4], "textures/bluestone.xpm", &img);
-	load_image(s, s->texture[5], "textures/mossy.xpm", &img);
-	load_image(s, s->texture[6], "textures/wood.xpm", &img);
-	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
-}
-
-void	init_struct(t_screen *s)
-{
-	int	x;
-
-	x = -1;
-	s->w = 1280;
-	s->h = 760;
-	s->re_buf = 0;
-	s->mlx = mlx_init();
-	s->win = mlx_new_window(s->mlx, s->w, s->h, "cub3D");
-	s->img.ptr = mlx_new_image(s->mlx, s->w, s->h);
-	s->img.addr = (unsigned int*)mlx_get_data_addr(s->img.ptr, &s->img.bits_per_pixel, &s->img.size_line, &s->img.endian);
-	s->buf = (int **)malloc(sizeof(int *) * (s->h));
-	while (++x < s->h)
-		s->buf[x] = (int *)malloc(sizeof(int) * (s->w));
-	s->texture = (int **)malloc(sizeof(int *) * 8);
-	x = -1;
-	while (++x < 8)
-		s->texture[x] = (int *)malloc(sizeof(int) * (texWidth * texHeight));
-	load_texture(s);
-	s->pos = vec_new(22, 11.5);
-	s->dir = vec_new(-1, 0);
-	s->plane = vec_new(0, 0.66);
-	s->movespeed = 0.1;
-	s->rotspeed = 5;
-}
-
 int	main_loop(t_screen *s)
 {
 	int		x;
@@ -131,17 +71,17 @@ int	main_loop(t_screen *s)
 	if (s->re_buf == 1)
 	{
 		i = -1;
-		while (++i < s->h)
+		while (++i < SCREEN_H)
 		{
 			j = -1;
-			while (++j < s->w)
+			while (++j < SCREEN_W)
 				s->buf[i][j] = 0;
 		}
 	}
-	while (x < s->w)
+	while (x < SCREEN_W)
 	{
 		hit = 0;
-		camerax = 2 * x / (double)s->w - 1;
+		camerax = 2 * x / (double)SCREEN_W - 1;
 		raydir = vec_add(s->dir, vec_mul(s->plane, camerax));
 		map_x = (int)s->pos.x;
 		map_y = (int)s->pos.y;
@@ -187,13 +127,13 @@ int	main_loop(t_screen *s)
 			prep_wall_dist = (map_x - s->pos.x + (1 - step_x) / 2) / raydir.x;
 		else
 			prep_wall_dist = (map_y - s->pos.y + (1 - step_y) / 2) / raydir.y;
-		lineheight = (int)(s->h / prep_wall_dist);
-		draw_start = -lineheight / 2 + s->h / 2;
+		lineheight = (int)(SCREEN_H / prep_wall_dist);
+		draw_start = -lineheight / 2 + SCREEN_H / 2;
 		if (draw_start < 0)
 			draw_start = 0;
-		draw_end = lineheight / 2 + s->h / 2;
-		if (draw_end >= s->h)
-			draw_end = s->h - 1;
+		draw_end = lineheight / 2 + SCREEN_H / 2;
+		if (draw_end >= SCREEN_H)
+			draw_end = SCREEN_H - 1;
 		int	textnum = g_worldmap[map_x][map_y];
 		// int	textnum = g_worldmap[map_x][map_y] - 1;
 		double wall_x;
@@ -202,19 +142,19 @@ int	main_loop(t_screen *s)
 		else
 			wall_x = s->pos.x + prep_wall_dist * raydir.x;
 		wall_x -= floor(wall_x);
-		int	text_x = (int)(wall_x * (double)texWidth);
+		int	text_x = (int)(wall_x * (double)TEX_W);
 		if ((side == 0 && raydir.x > 0) || (side == 1 && raydir.y < 0))
-			text_x = texWidth - text_x - 1;
-		double step = 1.0 * texHeight / lineheight;
+			text_x = TEX_W - text_x - 1;
+		double step = 1.0 * TEX_H / lineheight;
 		//starting texture coordinate
-		double text_pos = (draw_start - s->h / 2 + lineheight / 2) * step;
+		double text_pos = (draw_start - SCREEN_H / 2 + lineheight / 2) * step;
 		int	y;
 		y = draw_start;
 		while (y < draw_end)
 		{
-			int	text_y = (int)text_pos & (texHeight - 1);
+			int	text_y = (int)text_pos & (TEX_H - 1);
 			text_pos += step;
-			color = s->texture[textnum][texHeight * text_y + text_x];
+			color = s->texture[textnum][TEX_H * text_y + text_x];
 			if (side == 1)
 				color = (color >> 1) & 8355711;
 			s->buf[y][x] = color;
@@ -223,9 +163,9 @@ int	main_loop(t_screen *s)
 		}
 		x++;
 	}
-	for(int y = 0; y < s->h; y++){
-		for(int x = 0; x < s->w; x++)
-			s->img.addr[y * s->w + x] = s->buf[y][x];
+	for(int y = 0; y < SCREEN_H; y++){
+		for(int x = 0; x < SCREEN_W; x++)
+			s->img.addr[y * SCREEN_W + x] = s->buf[y][x];
 	}
 	mlx_put_image_to_window(s->mlx, s->win, s->img.ptr, 0, 0);
 	return (0);

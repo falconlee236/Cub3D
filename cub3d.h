@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/24 12:16:48 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/01/24 12:26:09 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,32 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./mlx/mlx.h"
-# define PI 3.14159265
+
+//SECTION - KEY MACRO
 # define X_EVENT_KEY_PRESS			2
 # define X_EVENT_KEY_RELEASE		3
 # define ON_DESTROY 				17
-
 # define KEY_ESC		53
 # define KEY_W			13
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+//!SECTION
 
+//SECTION - PIXEL SIZE CONST
 # define TEX_W 64
 # define TEX_H 64
 # define SCREEN_W 1280
 # define SCREEN_H 760
+//!SECTION
 
-//SECTION Vector struct
+//SECTION Vector operation
 typedef struct s_vec{
 	double	x;
 	double	y;
 }	t_vec;
+# define PI 3.14159265
+//!SECTION
 
 typedef struct s_img{
 	int				w;
@@ -83,4 +88,7 @@ int		destory_hook_event(t_screen *s);
 
 //ANCHOR - Main loop
 int		main_loop(t_screen *s);
+
+//ANCHOR - Init struct
+void	init_struct(t_screen *s);
 #endif
