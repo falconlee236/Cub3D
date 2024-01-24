@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook_event.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:17:34 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/22 19:29:36 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:29:46 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int g_worldmap[24][24];
+extern int	g_worldmap[24][24];
 
 static void	move_front_back(int key, t_screen *s)
 {
