@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/24 13:25:08 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/01/25 18:00:43 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef struct s_raycast_info{
 	t_vec	sidedist;
 	t_pos	map_pos;
 	t_pos	step_size;
+	double	prep_wall_dist;
+	int		hit;
+	int		side;
 }	t_raycast_info;
 
 typedef struct s_img{
