@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:40:05 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 19:44:41 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,7 @@
 
 extern int	g_worldmap[24][24];
 
-void	clear_buffer(t_screen *s)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < SCREEN_H)
-	{
-		j = -1;
-		while (++j < SCREEN_W)
-			s->buf[i][j] = 0;
-	}
-}
-
-t_pos	pos_new(int x, int y)
-{
-	t_pos	res;
-
-	res.x = x;
-	res.y = y;
-	return (res);
-}
-
-void	init_raycast(t_screen *s, t_raycast_info *info)
+static void	init_raycast(t_screen *s, t_raycast_info *info)
 {
 	if (info->raydir.x < 0)
 	{
@@ -63,7 +40,7 @@ void	init_raycast(t_screen *s, t_raycast_info *info)
 	}
 }
 
-void	doing_raycast(t_screen *s, t_raycast_info *info)
+static void	doing_raycast(t_screen *s, t_raycast_info *info)
 {
 	while (info->hit == 0)
 	{
@@ -90,7 +67,7 @@ void	doing_raycast(t_screen *s, t_raycast_info *info)
 					1 - info->step_size.y) / 2) / info->raydir.y;
 }
 
-void	set_raycastinfo(t_screen *s, t_raycast_info *info)
+static void	set_raycastinfo(t_screen *s, t_raycast_info *info)
 {
 	int		lineheight;
 	double	wall_x;
@@ -115,8 +92,9 @@ void	set_raycastinfo(t_screen *s, t_raycast_info *info)
 	info->text_pos = (info->draw_start - SCREEN_H / 2 + lineheight / 2)
 		* info->step;
 }
+
 // int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
-void	drawing_raycast(t_screen *s, t_raycast_info *info, int x)
+static void	drawing_raycast(t_screen *s, t_raycast_info *info, int x)
 {
 	int	y;
 	int	textnum;
@@ -134,24 +112,6 @@ void	drawing_raycast(t_screen *s, t_raycast_info *info, int x)
 			color = (color >> 1) & 8355711;
 		s->buf[y][x] = color;
 		s->re_buf = 1;
-		y++;
-	}
-}
-
-void	switch_buffer(t_screen *s)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < SCREEN_H)
-	{
-		x = 0;
-		while (x < SCREEN_W)
-		{
-			s->img.addr[y * SCREEN_W + x] = s->buf[y][x];
-			x++;
-		}
 		y++;
 	}
 }
