@@ -6,11 +6,11 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:41:12 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:41:59 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 19:58:16 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	clear_buffer(t_screen *s)
 {

@@ -6,11 +6,11 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:44:41 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 19:59:05 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 extern int	g_worldmap[24][24];
 
