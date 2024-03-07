@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:10:55 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 19:21:40 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,18 +115,34 @@ void	set_raycastinfo(t_screen *s, t_raycast_info *info)
 	info->text_pos = (info->draw_start - SCREEN_H / 2 + lineheight / 2)
 		* info->step;
 }
+// int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
+void	drawing_raycast(t_screen *s, t_raycast_info *info, int x)
+{
+	int	y;
+	int	textnum;
+	int	text_y;
+	int	color;
 
-// void	drawing_raycast(t_raycast_info *info)
-// {
-
-// }
+	y = info->draw_start;
+	textnum = g_worldmap[info->map_pos.x][info->map_pos.y];
+	while (y < info->draw_end)
+	{
+		text_y = (int)(info->text_pos) & (TEX_H - 1);
+		info->text_pos += info->step;
+		color = s->texture[textnum][TEX_H * text_y + info->text_x];
+		if (info->side == 1)
+			color = (color >> 1) & 8355711;
+		s->buf[y][x] = color;
+		s->re_buf = 1;
+		y++;
+	}
+}
 
 int	main_loop(t_screen *s)
 {
 	int				x;
 	double			camera_x;
 	t_raycast_info	info;
-	int				color;
 
 	if (s->re_buf == 1)
 		clear_buffer(s);
@@ -142,20 +158,7 @@ int	main_loop(t_screen *s)
 		init_raycast(s, &info);
 		doing_raycast(s, &info);
 		set_raycastinfo(s, &info);
-		int	y;
-		y = info.draw_start;
-		int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y]; // int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
-		while (y < info.draw_end)
-		{
-			int	text_y = (int)(info.text_pos) & (TEX_H - 1);
-			info.text_pos += info.step;
-			color = s->texture[textnum][TEX_H * text_y + info.text_x];
-			if (info.side == 1)
-				color = (color >> 1) & 8355711;
-			s->buf[y][x] = color;
-			s->re_buf = 1;
-			y++;
-		}
+		drawing_raycast(s, &info, x);
 		x++;
 	}
 	for(int y = 0; y < SCREEN_H; y++){
