@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:21:40 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 19:40:05 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,24 @@ void	drawing_raycast(t_screen *s, t_raycast_info *info, int x)
 	}
 }
 
+void	switch_buffer(t_screen *s)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < SCREEN_H)
+	{
+		x = 0;
+		while (x < SCREEN_W)
+		{
+			s->img.addr[y * SCREEN_W + x] = s->buf[y][x];
+			x++;
+		}
+		y++;
+	}
+}
+
 int	main_loop(t_screen *s)
 {
 	int				x;
@@ -161,10 +179,7 @@ int	main_loop(t_screen *s)
 		drawing_raycast(s, &info, x);
 		x++;
 	}
-	for(int y = 0; y < SCREEN_H; y++){
-		for(int x = 0; x < SCREEN_W; x++)
-			s->img.addr[y * SCREEN_W + x] = s->buf[y][x];
-	}
+	switch_buffer(s);
 	mlx_put_image_to_window(s->mlx, s->win, s->img.ptr, 0, 0);
 	return (0);
 }
