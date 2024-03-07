@@ -1,7 +1,9 @@
 NAME=cub3D
 CFLAGS=cc -Wall -Wextra -Werror -o
 
-SRCS=cub3d.c key_hook_event.c init_struct.c main_loop.c $(wildcard vector/*.c)
+SRCS=cub3d.c key_hook_event.c init_struct.c \
+		main_loop.c raycast_util.c\
+		$(wildcard vector/*.c)
 
 all: $(NAME)
 
