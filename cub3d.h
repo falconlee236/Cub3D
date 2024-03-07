@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/07 17:51:01 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 19:44:18 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,9 @@ int		main_loop(t_screen *s);
 
 //ANCHOR - Init struct
 void	init_struct(t_screen *s);
+
+//ANCHOR - raycast util function
+void	clear_buffer(t_screen *s);
+t_pos	pos_new(int x, int y);
+void	switch_buffer(t_screen *s);
 #endif
