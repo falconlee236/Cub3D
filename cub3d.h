@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/01/25 18:00:43 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 17:19:44 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@
 # define TEX_H 64
 # define SCREEN_W 1280
 # define SCREEN_H 760
+//!SECTION
+
+//SECTION - Game Play Parameter
+# define MOVESPEED 0.3
+# define ROTSPEED 7
 //!SECTION
 
 //SECTION Vector operation

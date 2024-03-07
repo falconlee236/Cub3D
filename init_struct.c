@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/01/24 12:18:26 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 17:19:58 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void	init_struct(t_screen *s)
 	s->pos = vec_new(22, 11.5);
 	s->dir = vec_new(-1, 0);
 	s->plane = vec_new(0, 0.66);
-	s->movespeed = 0.1;
-	s->rotspeed = 5;
+	s->movespeed = MOVESPEED;
+	s->rotspeed = ROTSPEED;
 }
