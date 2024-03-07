@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/01/25 18:25:57 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 19:10:55 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,42 @@ void	doing_raycast(t_screen *s, t_raycast_info *info)
 					1 - info->step_size.y) / 2) / info->raydir.y;
 }
 
+void	set_raycastinfo(t_screen *s, t_raycast_info *info)
+{
+	int		lineheight;
+	double	wall_x;
+
+	lineheight = (int)(SCREEN_H / info->prep_wall_dist);
+	info->draw_start = -lineheight / 2 + SCREEN_H / 2;
+	if (info->draw_start < 0)
+		info->draw_start = 0;
+	info->draw_end = lineheight / 2 + SCREEN_H / 2;
+	if (info->draw_end >= SCREEN_H)
+		info->draw_end = SCREEN_H - 1;
+	if (info->side == 0)
+		wall_x = s->pos.y + info->prep_wall_dist * info->raydir.y;
+	else
+		wall_x = s->pos.x + info->prep_wall_dist * info->raydir.x;
+	wall_x -= floor(wall_x);
+	info->text_x = (int)(wall_x * (double)TEX_W);
+	if ((info->side == 0 && info->raydir.x > 0)
+		|| (info->side == 1 && info->raydir.y < 0))
+		info->text_x = TEX_W - info->text_x - 1;
+	info->step = 1.0 * TEX_H / lineheight;
+	info->text_pos = (info->draw_start - SCREEN_H / 2 + lineheight / 2)
+		* info->step;
+}
+
+// void	drawing_raycast(t_raycast_info *info)
+// {
+
+// }
+
 int	main_loop(t_screen *s)
 {
 	int				x;
 	double			camera_x;
 	t_raycast_info	info;
-	int				lineheight;
-	int				draw_start;
-	int				draw_end;
 	int				color;
 
 	if (s->re_buf == 1)
@@ -113,34 +141,15 @@ int	main_loop(t_screen *s)
 				fabs(1 / info.raydir.x), fabs(1 / info.raydir.y));
 		init_raycast(s, &info);
 		doing_raycast(s, &info);
-		lineheight = (int)(SCREEN_H / info.prep_wall_dist);
-		draw_start = -lineheight / 2 + SCREEN_H / 2;
-		if (draw_start < 0)
-			draw_start = 0;
-		draw_end = lineheight / 2 + SCREEN_H / 2;
-		if (draw_end >= SCREEN_H)
-			draw_end = SCREEN_H - 1;
-		int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y];
-		// int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
-		double wall_x;
-		if (info.side == 0)
-			wall_x = s->pos.y + info.prep_wall_dist * info.raydir.y;
-		else
-			wall_x = s->pos.x + info.prep_wall_dist * info.raydir.x;
-		wall_x -= floor(wall_x);
-		int	text_x = (int)(wall_x * (double)TEX_W);
-		if ((info.side == 0 && info.raydir.x > 0) || (info.side == 1 && info.raydir.y < 0))
-			text_x = TEX_W - text_x - 1;
-		double step = 1.0 * TEX_H / lineheight;
-		//starting texture coordinate
-		double text_pos = (draw_start - SCREEN_H / 2 + lineheight / 2) * step;
+		set_raycastinfo(s, &info);
 		int	y;
-		y = draw_start;
-		while (y < draw_end)
+		y = info.draw_start;
+		int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y]; // int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
+		while (y < info.draw_end)
 		{
-			int	text_y = (int)text_pos & (TEX_H - 1);
-			text_pos += step;
-			color = s->texture[textnum][TEX_H * text_y + text_x];
+			int	text_y = (int)(info.text_pos) & (TEX_H - 1);
+			info.text_pos += info.step;
+			color = s->texture[textnum][TEX_H * text_y + info.text_x];
 			if (info.side == 1)
 				color = (color >> 1) & 8355711;
 			s->buf[y][x] = color;

@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/07 17:19:44 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 17:51:01 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ typedef struct s_raycast_info{
 	double	prep_wall_dist;
 	int		hit;
 	int		side;
+	int		draw_start;
+	int		draw_end;
+	int		text_x;
+	double	step;
+	double	text_pos;
 }	t_raycast_info;
 
 typedef struct s_img{
@@ -92,6 +97,7 @@ typedef struct s_screen{
 	t_vec	dir;
 	t_vec	plane;
 }	t_screen;
+//!SECTION
 
 //ANCHOR - Vector operation
 t_vec	vec_new(double x, double y);
