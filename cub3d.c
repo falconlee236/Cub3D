@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:46:06 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 19:47:01 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,8 @@ int	main(int argc, char **argv)
 	t_screen	s;
 
 	atexit(leak_check);
+	if (!init_map(argc, argv))
+		return (-1);
 	init_struct(&s);
 	s.move.key_a = 0;
 	s.move.key_s = 0;
@@ -164,7 +166,6 @@ int	main(int argc, char **argv)
 	s.move.key_d = 0;
 	s.move.key_arr_l = 0;
 	s.move.key_arr_r = 0;
-	init_map(argc, argv);
 	mlx_loop_hook(s.mlx, &main_loop, &s);
 	mlx_hook(s.win, ON_DESTROY, 0, &destory_hook_event, &s);
 	mlx_hook(s.win, X_EVENT_KEY_PRESS, 0, &key_press, &s);
