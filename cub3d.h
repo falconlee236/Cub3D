@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:19:12 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 19:47:15 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,13 @@ typedef struct s_screen{
 	t_vec	plane;
 }	t_screen;
 //!SECTION
+
+typedef struct	s_map{
+	int	**map;
+	int	max_height;
+	int	max_width;
+}	t_map;
+
 
 //ANCHOR - Vector operation
 t_vec	vec_new(double x, double y);
