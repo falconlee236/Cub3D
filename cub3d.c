@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/12 22:55:37 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/15 19:46:06 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
 void	decide_color_and_drawing(
 	t_screen *s, t_img *map, t_pos *conv_cord, t_pos *pos)
 {
-	
+
 }
 
 void	render_map(t_screen *s)
@@ -152,7 +152,7 @@ int	main_loop(t_screen *s)
 
 
 //LINK - Main.c
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_screen	s;
 
@@ -164,6 +164,7 @@ int	main(void)
 	s.move.key_d = 0;
 	s.move.key_arr_l = 0;
 	s.move.key_arr_r = 0;
+	init_map(argc, argv);
 	mlx_loop_hook(s.mlx, &main_loop, &s);
 	mlx_hook(s.win, ON_DESTROY, 0, &destory_hook_event, &s);
 	mlx_hook(s.win, X_EVENT_KEY_PRESS, 0, &key_press, &s);

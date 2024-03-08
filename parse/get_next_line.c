@@ -6,11 +6,11 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 06:00:23 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/08 22:17:07 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/08 22:33:03 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "parse.h"
 
 static char	*get_a_line(char **line, char *backup, ssize_t size)
 {

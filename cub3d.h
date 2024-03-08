@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:18:52 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 19:19:12 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./mlx/mlx.h"
-# include "./parse/get_next_line.h"
+# include "./parse/parse.h"
 
 //SECTION - KEY MACRO
 # define X_EVENT_KEY_PRESS			2

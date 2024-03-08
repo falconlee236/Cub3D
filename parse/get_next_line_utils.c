@@ -6,11 +6,11 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 06:00:32 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/08 22:16:32 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/08 22:33:06 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "parse.h"
 
 void	*ft_free(char **target)
 {
