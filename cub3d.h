@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/07 19:44:18 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 23:34:06 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_pos{
 }	t_pos;
 //!SECTION
 
-//SECTION - Ray casting struct
-typedef struct s_raycast_info{
+//SECTION - wall Ray casting struct
+typedef struct s_vert_raycast_info{
 	t_vec	raydir;
 	t_vec	deltadist;
 	t_vec	sidedist;
@@ -72,7 +72,14 @@ typedef struct s_raycast_info{
 	int		text_x;
 	double	step;
 	double	text_pos;
-}	t_raycast_info;
+}	t_vert_raycast_info;
+//!SECTION
+
+//SECTION - floor, celling ray casting struct
+typedef struct s_hori_raycast_info{
+	t_vec	raydir;
+}	t_hori_raycast_info;
+//!SECTION 
 
 typedef struct s_img{
 	int				w;

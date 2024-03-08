@@ -6,7 +6,7 @@
 /*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:59:05 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/07 23:34:27 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_worldmap[24][24];
 
-static void	init_raycast(t_screen *s, t_raycast_info *info)
+static void	init_raycast(t_screen *s, t_vert_raycast_info *info)
 {
 	if (info->raydir.x < 0)
 	{
@@ -40,7 +40,7 @@ static void	init_raycast(t_screen *s, t_raycast_info *info)
 	}
 }
 
-static void	doing_raycast(t_screen *s, t_raycast_info *info)
+static void	doing_raycast(t_screen *s, t_vert_raycast_info *info)
 {
 	while (info->hit == 0)
 	{
@@ -67,7 +67,7 @@ static void	doing_raycast(t_screen *s, t_raycast_info *info)
 					1 - info->step_size.y) / 2) / info->raydir.y;
 }
 
-static void	set_raycastinfo(t_screen *s, t_raycast_info *info)
+static void	set_raycastinfo(t_screen *s, t_vert_raycast_info *info)
 {
 	int		lineheight;
 	double	wall_x;
@@ -94,7 +94,7 @@ static void	set_raycastinfo(t_screen *s, t_raycast_info *info)
 }
 
 // int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
-static void	drawing_raycast(t_screen *s, t_raycast_info *info, int x)
+static void	drawing_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 {
 	int	y;
 	int	textnum;
@@ -116,14 +116,23 @@ static void	drawing_raycast(t_screen *s, t_raycast_info *info, int x)
 	}
 }
 
+void	wall_raycast(t_screen *s)
+{
+	int					y;
+	t_hori_raycast_info	info;
+
+	y = 0;
+}
+
 int	main_loop(t_screen *s)
 {
-	int				x;
-	double			camera_x;
-	t_raycast_info	info;
+	int					x;
+	double				camera_x;
+	t_vert_raycast_info	info;
 
 	if (s->re_buf == 1)
 		clear_buffer(s);
+	wall_raycast(s);
 	x = 0;
 	while (x < SCREEN_W)
 	{
