@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:59:05 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/10 14:40:36 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ static void	load_image(t_screen *s, int *texture, char *path, t_img *img)
 	int	y;
 
 	img->ptr = mlx_xpm_file_to_image(s->mlx, path, &img->w, &img->h);
-	img->addr = (unsigned int *)mlx_get_data_addr(img->ptr, 
+	if (!img->ptr)
+	{
+		perror(path);
+		exit(1);
+	}
+	img->addr = (unsigned int *)mlx_get_data_addr(img->ptr,
 			&img->bits_per_pixel, &img->size_line, &img->endian);
 	y = -1;
 	while (++y < img->h)
@@ -53,7 +58,7 @@ void	init_struct(t_screen *s)
 	s->mlx = mlx_init();
 	s->win = mlx_new_window(s->mlx, SCREEN_W, SCREEN_H, "cub3D");
 	s->img.ptr = mlx_new_image(s->mlx, SCREEN_W, SCREEN_H);
-	s->img.addr = (unsigned int *)mlx_get_data_addr(s->img.ptr, 
+	s->img.addr = (unsigned int *)mlx_get_data_addr(s->img.ptr,
 			&s->img.bits_per_pixel, &s->img.size_line, &s->img.endian);
 	s->buf = (int **)malloc(sizeof(int *) * SCREEN_H);
 	while (++x < SCREEN_H)
