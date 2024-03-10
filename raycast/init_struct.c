@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 16:58:03 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:24:29 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	init_struct(t_screen *s)
 {
 	int	x;
 
-	x = -1;
 	s->re_buf = 0;
 	s->mouse_toggle = 0;
 	s->mlx = mlx_init();
@@ -62,6 +61,7 @@ void	init_struct(t_screen *s)
 	s->img.addr = (unsigned int *)mlx_get_data_addr(s->img.ptr,
 			&s->img.bits_per_pixel, &s->img.size_line, &s->img.endian);
 	s->buf = (int **)malloc(sizeof(int *) * SCREEN_H);
+	x = -1;
 	while (++x < SCREEN_H)
 		s->buf[x] = (int *)malloc(sizeof(int) * SCREEN_W);
 	s->texture = (int **)malloc(sizeof(int *) * 8);

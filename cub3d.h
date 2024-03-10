@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 17:09:15 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 18:14:28 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@
 //SECTION - Game Play Parameter
 # define MOVESPEED 0.05
 # define ROTSPEED 3
+//!SECTION
+
+//SECTION - Map Parameter
+# define MINI_SCALE 0.25
+# define TILE_SIZE 60
+# define MAP_NUM_ROWS 6
+# define MAP_NUM_COLS 6
 //!SECTION
 
 //SECTION Vector operation
