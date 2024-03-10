@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:37:27 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:52:47 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 //!SECTION
 
 //SECTION - Game Play Parameter
-# define MOVESPEED 0.3
-# define ROTSPEED 7
+# define MOVESPEED 0.1
+# define ROTSPEED 5
 //!SECTION
 
 //SECTION Vector operation
@@ -90,8 +90,6 @@ typedef struct s_move{
 	int	key_s;
 	int	key_d;
 	int	key_w;
-	int	key_arr_u;
-	int	key_arr_d;
 	int	key_arr_l;
 	int	key_arr_r;
 }	t_move;
@@ -132,7 +130,7 @@ t_vec	get_dir_vec(t_vec a, t_vec b, double x, double y);
 t_vec	vec_rot(t_vec a, int theta);
 
 //ANCHOR - Key hook event
-int		key_hook_event(int key, t_screen *s);
+int		key_hook_event(t_screen *s);
 int		destory_hook_event(t_screen *s);
 int		key_press(int key, t_screen *s);
 int		key_release(int key, t_screen *s);
@@ -157,4 +155,9 @@ void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
 void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
 void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info);
 void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x);
+
+//ANCHOR - player move function
+void	move_front_back(t_screen *s);
+void	move_left_right(t_screen *s);
+void	rot_left_right(t_screen *s);
 #endif
