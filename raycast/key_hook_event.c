@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook_event.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:17:34 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/07 19:59:05 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/10 14:31:16 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern int	g_worldmap[24][24];
 
 static void	move_front_back(int key, t_screen *s)
 {
-	if (key == KEY_W)
+	if (key == KEY_W || key == K_AR_U)
 	{
 		if (!g_worldmap[
 				(int)(s->pos.x + s->dir.x * s->movespeed)][(int)(s->pos.y)])
@@ -25,7 +25,7 @@ static void	move_front_back(int key, t_screen *s)
 				(int)(s->pos.x)][(int)(s->pos.y + s->dir.y * s->movespeed)])
 			s->pos.y += s->dir.y * s->movespeed;
 	}
-	else if (key == KEY_S)
+	else if (key == KEY_S || key == K_AR_D)
 	{
 		if (!g_worldmap[
 				(int)(s->pos.x - s->dir.x * s->movespeed)][(int)(s->pos.y)])
@@ -38,12 +38,12 @@ static void	move_front_back(int key, t_screen *s)
 
 static void	rot_left_right(int key, t_screen *s)
 {
-	if (key == KEY_D)
+	if (key == KEY_D || key == K_AR_R)
 	{
 		s->dir = vec_rot(s->dir, -s->rotspeed);
 		s->plane = vec_rot(s->plane, -s->rotspeed);
 	}
-	if (key == KEY_A)
+	if (key == KEY_A || key == K_AR_L)
 	{
 		s->dir = vec_rot(s->dir, s->rotspeed);
 		s->plane = vec_rot(s->plane, s->rotspeed);
@@ -52,13 +52,13 @@ static void	rot_left_right(int key, t_screen *s)
 
 int	key_hook_event(int key, t_screen *s)
 {
-	if (key == KEY_W)
+	if (key == KEY_W || key == K_AR_U)
 		move_front_back(key, s);
-	if (key == KEY_S)
+	if (key == KEY_S || key == K_AR_D)
 		move_front_back(key, s);
-	if (key == KEY_D)
+	if (key == KEY_D || key == K_AR_R)
 		rot_left_right(key, s);
-	if (key == KEY_A)
+	if (key == KEY_A || key == K_AR_L)
 		rot_left_right(key, s);
 	if (key == KEY_ESC)
 		destory_hook_event(s);
