@@ -6,11 +6,11 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 15:51:10 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:52:30 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:54:01 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 extern int	g_worldmap[24][24];
 

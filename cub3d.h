@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:52:47 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:54:37 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 //!SECTION
 
 //SECTION - Game Play Parameter
-# define MOVESPEED 0.1
-# define ROTSPEED 5
+# define MOVESPEED 0.05
+# define ROTSPEED 3
 //!SECTION
 
 //SECTION Vector operation
