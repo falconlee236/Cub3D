@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 14:45:46 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:25:47 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@
 # define KEY_A						0
 # define KEY_S						1
 # define KEY_D						2
-# define K_AR_L 					123
-# define K_AR_R 					124
-# define K_AR_U 					126
-# define K_AR_D 					125
+# define KEY_AR_L 					123
+# define KEY_AR_R 					124
 //!SECTION
 
 //SECTION - PIXEL SIZE CONST
@@ -86,6 +84,19 @@ typedef struct s_hori_raycast_info{
 }	t_hori_raycast_info;
 //!SECTION 
 
+//SECTION - key move struct
+typedef struct s_move{
+	int	key_a;
+	int	key_s;
+	int	key_d;
+	int	key_w;
+	int	key_arr_u;
+	int	key_arr_d;
+	int	key_arr_l;
+	int	key_arr_r;
+}	t_move;
+//!SECTION
+
 typedef struct s_img{
 	int				w;
 	int				h;
@@ -104,6 +115,7 @@ typedef struct s_screen{
 	double	movespeed;
 	double	rotspeed;
 	int		re_buf;
+	t_move	move;
 	t_img	img;
 	t_vec	pos;
 	t_vec	dir;
