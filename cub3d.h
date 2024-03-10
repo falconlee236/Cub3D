@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 12:08:31 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:36:48 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,6 @@ t_vec	vec_rot(t_vec a, int theta);
 int		key_hook_event(int key, t_screen *s);
 int		destory_hook_event(t_screen *s);
 
-//ANCHOR - Main loop
-int		main_loop(t_screen *s);
-
 //ANCHOR - Init struct
 void	init_struct(t_screen *s);
 
@@ -129,4 +126,7 @@ void	init_struct(t_screen *s);
 void	clear_buffer(t_screen *s);
 t_pos	pos_new(int x, int y);
 void	switch_buffer(t_screen *s);
+
+//ANCHOR - horiontal raycast function
+void	horizontal_raycast(t_screen *s);
 #endif

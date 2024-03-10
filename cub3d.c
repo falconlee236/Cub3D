@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/07 23:04:55 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/10 12:36:41 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,34 @@ int	g_worldmap[24][24] = {
 void	leak_check(void)
 {
 	system("leaks cub3D");
+}
+
+static int	main_loop(t_screen *s)
+{
+	int					x;
+	double				camera_x;
+	t_vert_raycast_info	info;
+
+	if (s->re_buf == 1)
+		clear_buffer(s);
+	horizontal_raycast(s);
+	x = 0;
+	while (x < SCREEN_W)
+	{
+		info.hit = 0;
+		camera_x = 2 * x / (double)SCREEN_W - 1;
+		info.raydir = vec_add(s->dir, vec_mul(s->plane, camera_x));
+		info.map_pos = pos_new((int)s->pos.x, (int)s->pos.y);
+		info.deltadist = vec_new(
+				fabs(1 / info.raydir.x), fabs(1 / info.raydir.y));
+		init_raycast(s, &info);
+		doing_raycast(s, &info);
+		set_raycastinfo(s, &info);
+		drawing_raycast(s, &info, x);
+		x++;
+	}
+	switch_buffer(s);
+	return (0);
 }
 
 //LINK - Main.c

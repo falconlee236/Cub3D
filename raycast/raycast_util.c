@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:41:12 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 19:58:16 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/10 12:35:08 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void	switch_buffer(t_screen *s)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(s->mlx, s->win, s->img.ptr, 0, 0);
 }
