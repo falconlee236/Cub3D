@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:17:34 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:34:55 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:39:23 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	key_press(int key, t_screen *s)
 	if (key == KEY_AR_L)
 		s->move.key_arr_l = 1;
 	if (key == KEY_ESC || key == 65307)
-		exit (0);
+		destory_hook_event(s);
 	return (0);
 }
 
@@ -105,8 +105,6 @@ int	key_release(int key, t_screen *s)
 		s->move.key_arr_r = 0;
 	if (key == KEY_AR_L)
 		s->move.key_arr_l = 0;
-	if (key == KEY_ESC || key == 65307)
-		exit (0);
 	return (0);
 }
 
