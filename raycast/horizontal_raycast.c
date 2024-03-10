@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:31:21 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 12:35:43 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 14:18:01 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	init_horizontal_raycast(
 	end_raydir = vec_add(s->dir, s->plane);
 	cur_ypos = y - SCREEN_H / 2;
 	vertial_camera_pos = 0.5 * SCREEN_H;
-	row_dist = cur_ypos / vertial_camera_pos;
-	info->floor_step = vec_mul(
-			vec_mul(vec_sub(end_raydir, start_raydir), row_dist), 1 / SCREEN_W);
+	row_dist = vertial_camera_pos / cur_ypos;
+	info->floor_step.x = row_dist * (end_raydir.x - start_raydir.x) / SCREEN_W;
+	info->floor_step.y = row_dist * (end_raydir.y - start_raydir.y) / SCREEN_W;
 	info->floor_cord = vec_add(s->pos, vec_mul(start_raydir, row_dist));
 }
 
@@ -40,10 +40,12 @@ static void	doing_horizontal_raycast(t_screen *s, t_hori_raycast_info *info,
 	int		cell_idx;
 	int		color;
 
-	cell_cord.x = (int)info->floor_cord.x;
-	cell_cord.y = (int)info->floor_cord.y;
-	tex_cord.x = (int)(TEX_W * info->floor_cord.x - cell_cord.x) & (TEX_W - 1);
-	tex_cord.y = (int)(TEX_H * info->floor_cord.y - cell_cord.y) & (TEX_H - 1);
+	cell_cord.x = (int)(info->floor_cord.x);
+	cell_cord.y = (int)(info->floor_cord.y);
+	tex_cord.x = (int)(TEX_W * (info->floor_cord.x - cell_cord.x))
+		& (TEX_W - 1);
+	tex_cord.y = (int)(TEX_H * (info->floor_cord.y - cell_cord.y))
+		& (TEX_H - 1);
 	info->floor_cord = vec_add(info->floor_cord, info->floor_step);
 	floor_idx = 3;
 	cell_idx = 6;
