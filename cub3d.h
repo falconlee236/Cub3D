@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 12:36:48 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:43:20 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ int		destory_hook_event(t_screen *s);
 //ANCHOR - Init struct
 void	init_struct(t_screen *s);
 
+//ANCHOR - main loop
+int		main_loop(t_screen *s);
+
 //ANCHOR - raycast util function
 void	clear_buffer(t_screen *s);
 t_pos	pos_new(int x, int y);
@@ -129,4 +132,10 @@ void	switch_buffer(t_screen *s);
 
 //ANCHOR - horiontal raycast function
 void	horizontal_raycast(t_screen *s);
+
+//ANCHOR - vertical raycast function
+void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
+void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
+void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info);
+void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x);
 #endif

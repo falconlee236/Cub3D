@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 12:36:41 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:43:00 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	leak_check(void)
 	system("leaks cub3D");
 }
 
-static int	main_loop(t_screen *s)
+int	main_loop(t_screen *s)
 {
 	int					x;
 	double				camera_x;
@@ -62,10 +62,10 @@ static int	main_loop(t_screen *s)
 		info.map_pos = pos_new((int)s->pos.x, (int)s->pos.y);
 		info.deltadist = vec_new(
 				fabs(1 / info.raydir.x), fabs(1 / info.raydir.y));
-		init_raycast(s, &info);
-		doing_raycast(s, &info);
-		set_raycastinfo(s, &info);
-		drawing_raycast(s, &info, x);
+		init_vertical_raycast(s, &info);
+		doing_vertical_raycast(s, &info);
+		set_vertical_raycastinfo(s, &info);
+		drawing_vertical_raycast(s, &info, x);
 		x++;
 	}
 	switch_buffer(s);

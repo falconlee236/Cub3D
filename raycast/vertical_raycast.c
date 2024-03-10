@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   vertical_raycast.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 12:36:25 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:41:43 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_worldmap[24][24];
 
-static void	init_raycast(t_screen *s, t_vert_raycast_info *info)
+void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 {
 	if (info->raydir.x < 0)
 	{
@@ -40,7 +40,7 @@ static void	init_raycast(t_screen *s, t_vert_raycast_info *info)
 	}
 }
 
-static void	doing_raycast(t_screen *s, t_vert_raycast_info *info)
+void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 {
 	while (info->hit == 0)
 	{
@@ -67,7 +67,7 @@ static void	doing_raycast(t_screen *s, t_vert_raycast_info *info)
 					1 - info->step_size.y) / 2) / info->raydir.y;
 }
 
-static void	set_raycastinfo(t_screen *s, t_vert_raycast_info *info)
+void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info)
 {
 	int		lineheight;
 	double	wall_x;
@@ -94,7 +94,7 @@ static void	set_raycastinfo(t_screen *s, t_vert_raycast_info *info)
 }
 
 // int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
-static void	drawing_raycast(t_screen *s, t_vert_raycast_info *info, int x)
+void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 {
 	int	y;
 	int	textnum;
