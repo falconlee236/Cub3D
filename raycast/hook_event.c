@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook_event.c                                   :+:      :+:    :+:   */
+/*   hook_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:17:34 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:52:13 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:10:00 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ int	key_press(int key, t_screen *s)
 		s->move.key_arr_r = 1;
 	if (key == KEY_AR_L)
 		s->move.key_arr_l = 1;
+	if (key == KEY_1)
+	{
+		s->mouse_toggle = 1;
+		mlx_mouse_hide();
+	}
+	if (key == KEY_2)
+	{
+		s->mouse_toggle = 0;
+		mlx_mouse_show();
+	}
 	if (key == KEY_ESC || key == 65307)
 		destory_hook_event(s);
 	return (0);
@@ -63,4 +73,16 @@ int	destory_hook_event(t_screen *s)
 {
 	mlx_destroy_window(s->mlx, s->win);
 	exit(0);
+}
+
+int	mouse_hook_event(int x, int y, t_screen *s)
+{
+	y = 0;
+	if (s->mouse_toggle)
+	{
+		mlx_mouse_move(s->win, SCREEN_W / 2, SCREEN_H / 2);
+		s->dir = vec_rot(s->dir, s->rotspeed * (SCREEN_W / 2 - x) * 0.05);
+		s->plane = vec_rot(s->plane, s->rotspeed * (SCREEN_W / 2 - x) * 0.05);
+	}
+	return (0);
 }

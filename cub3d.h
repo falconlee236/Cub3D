@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:54:37 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:09:15 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 //SECTION - KEY MACRO
 # define X_EVENT_KEY_PRESS			2
 # define X_EVENT_KEY_RELEASE		3
+# define X_EVENT_MOUSE_MOVE			6
 # define ON_DESTROY 				17
 # define KEY_ESC					53
 # define KEY_W						13
@@ -29,6 +30,8 @@
 # define KEY_D						2
 # define KEY_AR_L 					123
 # define KEY_AR_R 					124
+# define KEY_1						18
+# define KEY_2						19
 //!SECTION
 
 //SECTION - PIXEL SIZE CONST
@@ -113,6 +116,7 @@ typedef struct s_screen{
 	double	movespeed;
 	double	rotspeed;
 	int		re_buf;
+	int		mouse_toggle;
 	t_move	move;
 	t_img	img;
 	t_vec	pos;
@@ -129,11 +133,12 @@ t_vec	vec_mul(t_vec a, double c);
 t_vec	get_dir_vec(t_vec a, t_vec b, double x, double y);
 t_vec	vec_rot(t_vec a, int theta);
 
-//ANCHOR - Key hook event
+//ANCHOR - hook event
 int		key_hook_event(t_screen *s);
 int		destory_hook_event(t_screen *s);
 int		key_press(int key, t_screen *s);
 int		key_release(int key, t_screen *s);
+int		mouse_hook_event(int x, int y, t_screen *s);
 
 //ANCHOR - Init struct
 void	init_struct(t_screen *s);

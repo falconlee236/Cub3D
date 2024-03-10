@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:48:51 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:08:54 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	main(void)
 	mlx_hook(s.win, ON_DESTROY, 0, &destory_hook_event, &s);
 	mlx_hook(s.win, X_EVENT_KEY_PRESS, 0, &key_press, &s);
 	mlx_hook(s.win, X_EVENT_KEY_RELEASE, 0, &key_release, &s);
+	mlx_hook(s.win, X_EVENT_MOUSE_MOVE, 0, &mouse_hook_event, &s);
 	mlx_loop(s.mlx);
 	return (0);
 }

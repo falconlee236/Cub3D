@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 14:40:36 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:58:03 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_struct(t_screen *s)
 
 	x = -1;
 	s->re_buf = 0;
+	s->mouse_toggle = 0;
 	s->mlx = mlx_init();
 	s->win = mlx_new_window(s->mlx, SCREEN_W, SCREEN_H, "cub3D");
 	s->img.ptr = mlx_new_image(s->mlx, SCREEN_W, SCREEN_H);
