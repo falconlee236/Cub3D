@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:31:21 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 14:18:01 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 14:51:22 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	doing_horizontal_raycast(t_screen *s, t_hori_raycast_info *info,
 	t_pos	tex_cord;
 	int		floor_idx;
 	int		cell_idx;
-	int		color;
 
 	cell_cord.x = (int)(info->floor_cord.x);
 	cell_cord.y = (int)(info->floor_cord.y);
@@ -49,12 +48,8 @@ static void	doing_horizontal_raycast(t_screen *s, t_hori_raycast_info *info,
 	info->floor_cord = vec_add(info->floor_cord, info->floor_step);
 	floor_idx = 3;
 	cell_idx = 6;
-	color = s->texture[floor_idx][TEX_W * tex_cord.y + tex_cord.x];
-	color = (color >> 1) & 8355711;
-	s->buf[y][x] = color;
-	color = s->texture[cell_idx][TEX_W * tex_cord.y + tex_cord.x];
-	color = (color >> 1) & 8355711;
-	s->buf[SCREEN_H - y - 1][x] = color;
+	s->buf[y][x] = (create_trgb(0, 0, 255, 0) >> 1) & 8355711;
+	s->buf[SCREEN_H - y - 1][x] = (create_trgb(0, 0, 255, 255) >> 1) & 8355711;
 }
 
 void	horizontal_raycast(t_screen *s)

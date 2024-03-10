@@ -6,11 +6,16 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:41:12 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 12:35:08 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 14:45:29 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
 void	clear_buffer(t_screen *s)
 {

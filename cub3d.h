@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 14:27:28 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 14:45:46 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int		main_loop(t_screen *s);
 void	clear_buffer(t_screen *s);
 t_pos	pos_new(int x, int y);
 void	switch_buffer(t_screen *s);
+int		create_trgb(int t, int r, int g, int b);
 
 //ANCHOR - horiontal raycast function
 void	horizontal_raycast(t_screen *s);
