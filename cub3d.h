@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 15:25:47 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:37:27 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ t_vec	vec_rot(t_vec a, int theta);
 //ANCHOR - Key hook event
 int		key_hook_event(int key, t_screen *s);
 int		destory_hook_event(t_screen *s);
+int		key_press(int key, t_screen *s);
+int		key_release(int key, t_screen *s);
 
 //ANCHOR - Init struct
 void	init_struct(t_screen *s);
