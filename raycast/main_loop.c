@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/07 23:34:27 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/10 12:31:46 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,66 @@ static void	drawing_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 	}
 }
 
-void	wall_raycast(t_screen *s)
+void	init_horizontal_raycast(t_screen *s, t_hori_raycast_info *info, int y)
 {
+	t_vec	start_raydir;
+	t_vec	end_raydir;
+	float	row_dist;
+	int		cur_ypos;
+	float	vertial_camera_pos;
+
+	start_raydir = vec_sub(s->dir, s->plane);
+	end_raydir = vec_add(s->dir, s->plane);
+	cur_ypos = y - SCREEN_H / 2;
+	vertial_camera_pos = 0.5 * SCREEN_H;
+	row_dist = cur_ypos / vertial_camera_pos;
+	info->floor_step = vec_mul(
+			vec_mul(vec_sub(end_raydir, start_raydir), row_dist), 1 / SCREEN_W);
+	info->floor_cord = vec_add(s->pos, vec_mul(start_raydir, row_dist));
+}
+
+void	doing_horizontal_raycast(t_screen *s, t_hori_raycast_info *info,
+	int x, int y)
+{
+	t_pos	cell_cord;
+	t_pos	tex_cord;
+	int		floor_idx;
+	int		cell_idx;
+	int		color;
+
+	cell_cord.x = (int)info->floor_cord.x;
+	cell_cord.y = (int)info->floor_cord.y;
+	tex_cord.x = (int)(TEX_W * info->floor_cord.x - cell_cord.x) & (TEX_W - 1);
+	tex_cord.y = (int)(TEX_H * info->floor_cord.y - cell_cord.y) & (TEX_H - 1);
+	info->floor_cord = vec_add(info->floor_cord, info->floor_step);
+	floor_idx = 3;
+	cell_idx = 6;
+	color = s->texture[floor_idx][TEX_W * tex_cord.y + tex_cord.x];
+	color = (color >> 1) & 8355711;
+	s->buf[y][x] = color;
+	color = s->texture[cell_idx][TEX_W * tex_cord.y + tex_cord.x];
+	color = (color >> 1) & 8355711;
+	s->buf[SCREEN_H - y - 1][x] = color;
+}
+
+void	horizontal_raycast(t_screen *s)
+{
+	int					x;
 	int					y;
 	t_hori_raycast_info	info;
 
 	y = 0;
+	while (y < SCREEN_H)
+	{
+		init_horizontal_raycast(s, &info, y);
+		x = 0;
+		while (x < SCREEN_W)
+		{
+			doing_horizontal_raycast(s, &info, x, y);
+			x++;
+		}
+		y++;
+	}
 }
 
 int	main_loop(t_screen *s)
@@ -132,7 +186,7 @@ int	main_loop(t_screen *s)
 
 	if (s->re_buf == 1)
 		clear_buffer(s);
-	wall_raycast(s);
+	horizontal_raycast(s);
 	x = 0;
 	while (x < SCREEN_W)
 	{

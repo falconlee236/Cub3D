@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/07 23:34:06 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/10 12:08:31 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ typedef struct s_vert_raycast_info{
 
 //SECTION - floor, celling ray casting struct
 typedef struct s_hori_raycast_info{
-	t_vec	raydir;
+	t_vec	floor_step;
+	t_vec	floor_cord;
 }	t_hori_raycast_info;
 //!SECTION 
 
