@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 12:41:43 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:10:15 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info)
 		* info->step;
 }
 
-// int	textnum = g_worldmap[info.map_pos.x][info.map_pos.y] - 1;
 void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 {
 	int	y;
@@ -102,7 +101,14 @@ void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 	int	color;
 
 	y = info->draw_start;
-	textnum = g_worldmap[info->map_pos.x][info->map_pos.y];
+	if (info->raydir.x >= 0 && info->side == 0) // 서쪽
+		textnum = 1;
+	else if (info->raydir.x < 0 && info->side == 0) // 동쪽
+		textnum = 2;
+	else if (info->raydir.y >= 0 && info->side == 1) // 북쪽
+		textnum = 3;
+	else if (info->raydir.y < 0 && info->side == 1) // 남쪽
+		textnum = 4;
 	while (y < info->draw_end)
 	{
 		text_y = (int)(info->text_pos) & (TEX_H - 1);
