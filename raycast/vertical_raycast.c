@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 15:10:15 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:13:57 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info)
 		* info->step;
 }
 
+/*
+맨 위부터 서쪽, 동쪽, 북쪽, 남쪽
+*/
 void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 {
 	int	y;
@@ -101,13 +104,13 @@ void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 	int	color;
 
 	y = info->draw_start;
-	if (info->raydir.x >= 0 && info->side == 0) // 서쪽
+	if (info->raydir.x >= 0 && info->side == 0)
 		textnum = 1;
-	else if (info->raydir.x < 0 && info->side == 0) // 동쪽
+	else if (info->raydir.x < 0 && info->side == 0)
 		textnum = 2;
-	else if (info->raydir.y >= 0 && info->side == 1) // 북쪽
+	else if (info->raydir.y >= 0 && info->side == 1)
 		textnum = 3;
-	else if (info->raydir.y < 0 && info->side == 1) // 남쪽
+	else if (info->raydir.y < 0 && info->side == 1)
 		textnum = 4;
 	while (y < info->draw_end)
 	{
