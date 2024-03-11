@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:17:34 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 17:10:00 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/11 22:36:26 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int	destory_hook_event(t_screen *s)
 
 int	mouse_hook_event(int x, int y, t_screen *s)
 {
-	y = 0;
+	y = 2;
 	if (s->mouse_toggle)
 	{
-		mlx_mouse_move(s->win, SCREEN_W / 2, SCREEN_H / 2);
+		mlx_mouse_move(s->win, SCREEN_W / y, SCREEN_H / y);
 		s->dir = vec_rot(s->dir, s->rotspeed * (SCREEN_W / 2 - x) * 0.05);
 		s->plane = vec_rot(s->plane, s->rotspeed * (SCREEN_W / 2 - x) * 0.05);
 	}

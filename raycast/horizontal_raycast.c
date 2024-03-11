@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_raycast.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:31:21 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 14:51:22 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/11 22:34:57 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void	doing_horizontal_raycast(t_screen *s, t_hori_raycast_info *info,
 {
 	t_pos	cell_cord;
 	t_pos	tex_cord;
-	int		floor_idx;
-	int		cell_idx;
 
 	cell_cord.x = (int)(info->floor_cord.x);
 	cell_cord.y = (int)(info->floor_cord.y);
@@ -46,8 +44,6 @@ static void	doing_horizontal_raycast(t_screen *s, t_hori_raycast_info *info,
 	tex_cord.y = (int)(TEX_H * (info->floor_cord.y - cell_cord.y))
 		& (TEX_H - 1);
 	info->floor_cord = vec_add(info->floor_cord, info->floor_step);
-	floor_idx = 3;
-	cell_idx = 6;
 	s->buf[y][x] = (create_trgb(0, 0, 255, 0) >> 1) & 8355711;
 	s->buf[SCREEN_H - y - 1][x] = (create_trgb(0, 0, 255, 255) >> 1) & 8355711;
 }
