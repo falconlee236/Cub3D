@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/10 18:14:28 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:32:44 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 //SECTION - Map Parameter
 # define MINI_SCALE 0.25
 # define TILE_SIZE 60
-# define MAP_NUM_ROWS 6
-# define MAP_NUM_COLS 6
+# define MAP_NUM_ROWS 10
+# define MAP_NUM_COLS 10
 //!SECTION
 
 //SECTION Vector operation
