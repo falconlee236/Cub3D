@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:47:15 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 22:27:02 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,9 @@ typedef struct s_screen{
 //!SECTION
 
 typedef struct	s_map{
-	int	**map;
-	int	max_height;
-	int	max_width;
+	int		**map;
+	size_t	max_height;
+	size_t	max_width;
 }	t_map;
 
 
