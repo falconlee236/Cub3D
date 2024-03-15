@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 22:45:26 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 22:52:33 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,11 @@ int	init_map(int argc, char **argv, t_map *map)
 {
 	map->max_height = 0;
 	map->max_width = 0;
-	if (argc != 2 || !argv || !(argv[1]))
-		return (0);
-	if (!check_filename(argv[1]))
-		return (0);
-	if (!set_map_size(argv[1], map))
-		return (0);
-	if (!alloc_map(map))
+	if (argc != 2 || !argv || !(argv[1])
+		|| !check_filename(argv[1])
+		|| !set_map_size(argv[1], map)
+		|| !alloc_map(map)
+		|| !set_map(argv[1], map))
 		return (0);
 	return (1);
 }
