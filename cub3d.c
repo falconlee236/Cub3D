@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 21:24:06 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 22:04:59 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,6 @@ int	main(int argc, char **argv)
 	mlx_hook(s.win, X_EVENT_KEY_RELEASE, 0, &key_release, &s);
 	mlx_hook(s.win, X_EVENT_MOUSE_MOVE, 0, &mouse_hook_event, &s);
 	mlx_loop(s.mlx);
+	free_map(&map);
 	return (0);
 }
