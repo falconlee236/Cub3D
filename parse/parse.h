@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:13:23 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 21:23:57 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 22:05:18 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include "../cub3d.h"
 # include "../libft/libft.h"
+
+typedef struct s_map	t_map;
 
 char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char **s1, char *s2);
