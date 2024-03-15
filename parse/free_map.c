@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 21:19:09 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 21:52:47 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 22:38:49 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 int	free_map(t_map *map)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (i < map->max_height)
+	while (map && map->map && i < map->max_height)
 	{
 		if ((map->map)[i])
 			free((map->map)[i]);
 		i++;
 	}
+	if (map->map)
+		free(map->map);
 	return (-1);
 }
