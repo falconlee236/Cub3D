@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 22:40:16 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 22:45:26 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	set_map_size(char *filename, t_map *map)
 		(map->max_height)++;
 	}
 	close(fd);
-	printf("SIZE %zd %zd\n", map->max_height, map->max_width);
 	if (map->max_height < 3 || !is_ok)
 		return (0);
 	return (1);
@@ -70,6 +69,8 @@ int	init_map(int argc, char **argv, t_map *map)
 	if (!check_filename(argv[1]))
 		return (0);
 	if (!set_map_size(argv[1], map))
+		return (0);
+	if (!alloc_map(map))
 		return (0);
 	return (1);
 }
