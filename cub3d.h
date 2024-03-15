@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/12 22:32:44 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/15 22:27:02 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./mlx/mlx.h"
+# include "./parse/parse.h"
 
 //SECTION - KEY MACRO
 # define X_EVENT_KEY_PRESS			2
@@ -92,7 +93,7 @@ typedef struct s_hori_raycast_info{
 	t_vec	floor_step;
 	t_vec	floor_cord;
 }	t_hori_raycast_info;
-//!SECTION 
+//!SECTION
 
 //SECTION - key move struct
 typedef struct s_move{
@@ -131,6 +132,13 @@ typedef struct s_screen{
 	t_vec	plane;
 }	t_screen;
 //!SECTION
+
+typedef struct	s_map{
+	int		**map;
+	size_t	max_height;
+	size_t	max_width;
+}	t_map;
+
 
 //ANCHOR - Vector operation
 t_vec	vec_new(double x, double y);

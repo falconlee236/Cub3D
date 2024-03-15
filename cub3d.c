@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/12 22:55:37 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/15 22:04:59 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
 void	decide_color_and_drawing(
 	t_screen *s, t_img *map, t_pos *conv_cord, t_pos *pos)
 {
-	
+
 }
 
 void	render_map(t_screen *s)
@@ -152,11 +152,14 @@ int	main_loop(t_screen *s)
 
 
 //LINK - Main.c
-int	main(void)
+int	main(int argc, char **argv)
 {
+	t_map		map;
 	t_screen	s;
 
 	atexit(leak_check);
+	if (!init_map(argc, argv, &map))
+		return (free_map(&map));
 	init_struct(&s);
 	s.move.key_a = 0;
 	s.move.key_s = 0;
@@ -170,5 +173,6 @@ int	main(void)
 	mlx_hook(s.win, X_EVENT_KEY_RELEASE, 0, &key_release, &s);
 	mlx_hook(s.win, X_EVENT_MOUSE_MOVE, 0, &mouse_hook_event, &s);
 	mlx_loop(s.mlx);
+	free_map(&map);
 	return (0);
 }
