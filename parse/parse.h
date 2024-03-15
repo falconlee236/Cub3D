@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:13:23 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 21:22:59 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 21:23:57 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char **s1, char *s2);
 int		free_map(t_map *map);
-int		init_map(int argc, char **argv);
+int		init_map(int argc, char **argv, t_map *map);
 void	*ft_free(char **target);
 
 #endif

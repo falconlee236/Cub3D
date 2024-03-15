@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 19:47:01 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 21:24:06 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,11 +154,12 @@ int	main_loop(t_screen *s)
 //LINK - Main.c
 int	main(int argc, char **argv)
 {
+	t_map		map;
 	t_screen	s;
 
 	atexit(leak_check);
-	if (!init_map(argc, argv))
-		return (-1);
+	if (!init_map(argc, argv, &map))
+		return (free_map(&map));
 	init_struct(&s);
 	s.move.key_a = 0;
 	s.move.key_s = 0;

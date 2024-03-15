@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/08 22:34:10 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 21:24:03 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_filename(char *str)
 	return (1);
 }
 
-int	init_map(int argc, char **argv)
+int	init_map(int argc, char **argv, t_map *map)
 {
 	if (argc != 2)
 		return (0);
