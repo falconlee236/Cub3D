@@ -6,11 +6,50 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 21:53:06 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/15 22:40:16 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+static void	set_map_width(char *line, t_map *map, int *is_ok)
+{
+	size_t	len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		len--;
+	if (len == 0)
+		*is_ok = 0;
+	if (map->max_width < len)
+		map->max_width = len;
+}
+
+static int	set_map_size(char *filename, t_map *map)
+{
+	char	*tmp_line;
+	int		fd;
+	int		is_ok;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	is_ok = 1;
+	while (is_ok > 0)
+	{
+		tmp_line = get_next_line(fd);
+		if (!tmp_line)
+			break ;
+		set_map_width(tmp_line, map, &is_ok);
+		free(tmp_line);
+		(map->max_height)++;
+	}
+	close(fd);
+	printf("SIZE %zd %zd\n", map->max_height, map->max_width);
+	if (map->max_height < 3 || !is_ok)
+		return (0);
+	return (1);
+}
 
 static int	check_filename(char *str)
 {
@@ -24,10 +63,13 @@ static int	check_filename(char *str)
 
 int	init_map(int argc, char **argv, t_map *map)
 {
-	(void)map;
+	map->max_height = 0;
+	map->max_width = 0;
 	if (argc != 2 || !argv || !(argv[1]))
 		return (0);
 	if (!check_filename(argv[1]))
+		return (0);
+	if (!set_map_size(argv[1], map))
 		return (0);
 	return (1);
 }
