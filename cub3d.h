@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 22:27:02 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/16 21:02:09 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,11 @@ typedef struct s_screen{
 }	t_screen;
 //!SECTION
 
-typedef struct	s_map{
+typedef struct s_map{
 	int		**map;
 	size_t	max_height;
 	size_t	max_width;
 }	t_map;
-
 
 //ANCHOR - Vector operation
 t_vec	vec_new(double x, double y);

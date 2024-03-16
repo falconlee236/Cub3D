@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/15 22:04:59 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/16 21:09:45 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	leak_check(void)
 	system("leaks cub3D");
 }
 
-void	fill_squres(t_img *map, int x, int y, int color)
+void	fill_squres(t_img *m_map, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -57,7 +57,7 @@ void	fill_squres(t_img *map, int x, int y, int color)
 		i = 0;
 		while (i < (int)(MINI_SCALE * TILE_SIZE))
 		{
-			map->addr[idx * (y + j) + (x + i)] = color;
+			m_map->addr[idx * (y + j) + (x + i)] = color;
 			i++;
 		}
 		j++;
@@ -81,43 +81,44 @@ void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
 }
 
 void	decide_color_and_drawing(
-	t_screen *s, t_img *map, t_pos *conv_cord, t_pos *pos)
+	t_screen *s, t_img *m_map, t_pos *conv_cord, t_pos *cord)
 {
-
+	if (g_worldmap[conv_cord->x][conv_cord->y])
+		fill_squres(m_map, (int)(MINI_SCALE * TILE_SIZE * cord->y),
+			(int)(MINI_SCALE * TILE_SIZE * cord->x), 0x000000);
+	else
+		fill_squres(m_map, (int)(MINI_SCALE * TILE_SIZE * cord->y),
+			(int)(MINI_SCALE * TILE_SIZE * cord->x), 0xffffff);
+	if (conv_cord->x == (int)s->pos.x && conv_cord->y == (int)s->pos.y)
+		fill_squres(m_map, (int)(MINI_SCALE * TILE_SIZE * cord->y),
+			(int)(MINI_SCALE * TILE_SIZE * cord->x), 0xff0000);
 }
 
 void	render_map(t_screen *s)
 {
-	int			x;
-	int			y;
-	t_img		map;
+	t_pos		cord;
+	t_img		m_map;
 	t_pos		conv_cord;
 
-	map.ptr = mlx_new_image(
+	m_map.ptr = mlx_new_image(
 			s->mlx, (int)(MINI_SCALE * SCREEN_W), (int)(MINI_SCALE * SCREEN_H));
-	map.addr = (unsigned int *)mlx_get_data_addr(map.ptr,
-			&(map.bits_per_pixel), &(map.size_line), &(map.endian));
-	x = 0;
-	while (x < MAP_NUM_ROWS)
+	m_map.addr = (unsigned int *)mlx_get_data_addr(m_map.ptr,
+			&(m_map.bits_per_pixel), &(m_map.size_line), &(m_map.endian));
+	cord.x = 0;
+	while (cord.x < MAP_NUM_ROWS)
 	{
-		y = 0;
-		while (y < MAP_NUM_COLS)
+		cord.y = 0;
+		while (cord.y < MAP_NUM_COLS)
 		{
-			if (g_worldmap[conv_cord.x][conv_cord.y])
-				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * y),
-					(int)(MINI_SCALE * TILE_SIZE * x), 0x000000);
-			else
-				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * y),
-					(int)(MINI_SCALE * TILE_SIZE * x), 0xffffff);
-			if (conv_cord.x == (int)s->pos.x && conv_cord.y == (int)s->pos.y)
-				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * y),
-					(int)(MINI_SCALE * TILE_SIZE * x), 0xff0000);
-			y++;
+			cord_convert(s, cord.x, cord.y, &conv_cord);
+			decide_color_and_drawing(s, &m_map, &conv_cord, &cord);
+			cord.y++;
 		}
-		x++;
+		cord.x++;
 	}
-	mlx_put_image_to_window(s->mlx, s->win, map.ptr,
-		(int)(SCREEN_W * (1.11 - MINI_SCALE)), (int)(SCREEN_H * (1.11 - MINI_SCALE)));
+	mlx_put_image_to_window(s->mlx, s->win, m_map.ptr,
+		(int)(SCREEN_W * (1.11 - MINI_SCALE)),
+		(int)(SCREEN_H * (1.11 - MINI_SCALE)));
 }
 
 int	main_loop(t_screen *s)
@@ -145,7 +146,7 @@ int	main_loop(t_screen *s)
 		x++;
 	}
 	switch_buffer(s);
-	render_map(s);
+	// render_map(s);
 	key_hook_event(s);
 	return (0);
 }
@@ -158,8 +159,10 @@ int	main(int argc, char **argv)
 	t_screen	s;
 
 	atexit(leak_check);
-	if (!init_map(argc, argv, &map))
-		return (free_map(&map));
+	argc = 0;
+	argv = NULL;
+	// if (!init_map(argc, argv, &map))
+	// 	return (free_map(&map));
 	init_struct(&s);
 	s.move.key_a = 0;
 	s.move.key_s = 0;
