@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 16:37:05 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:20:14 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,7 @@
 
 extern int	g_worldmap[24][24];
 
-void	set_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
-{
-	double	camera_x;
-
-	info->hit = 0;
-	camera_x = 2 * x / (double)SCREEN_W - 1;
-	info->raydir = vec_add(s->dir, vec_mul(s->plane, camera_x));
-	info->map_pos = pos_new((int)s->pos.x, (int)s->pos.y);
-	info->deltadist = vec_new(
-			fabs(1 / info->raydir.x), fabs(1 / info->raydir.y));
-}
-
-void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
+static void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 {
 	if (info->raydir.x < 0)
 	{
@@ -52,7 +40,7 @@ void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 	}
 }
 
-void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
+static void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 {
 	while (info->hit == 0)
 	{
@@ -79,7 +67,7 @@ void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 					1 - info->step_size.y) / 2) / info->raydir.y;
 }
 
-void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info)
+static void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info)
 {
 	int		lineheight;
 	double	wall_x;
@@ -108,7 +96,8 @@ void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info)
 /*
 맨 위부터 서쪽, 동쪽, 북쪽, 남쪽
 */
-void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
+static void	drawing_vertical_raycast(
+	t_screen *s, t_vert_raycast_info *info, int x)
 {
 	int	y;
 	int	textnum;
@@ -134,5 +123,28 @@ void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
 		s->buf[y][x] = color;
 		s->re_buf = 1;
 		y++;
+	}
+}
+
+void	vertical_raycast(t_screen *s)
+{
+	int					x;
+	double				camera_x;
+	t_vert_raycast_info	info;
+
+	x = 0;
+	while (x < SCREEN_W)
+	{
+		info.hit = 0;
+		camera_x = 2 * x / (double)SCREEN_W - 1;
+		info.raydir = vec_add(s->dir, vec_mul(s->plane, camera_x));
+		info.map_pos = pos_new((int)s->pos.x, (int)s->pos.y);
+		info.deltadist = vec_new(
+				fabs(1 / info.raydir.x), fabs(1 / info.raydir.y));
+		init_vertical_raycast(s, &info);
+		doing_vertical_raycast(s, &info);
+		set_vertical_raycastinfo(s, &info);
+		drawing_vertical_raycast(s, &info, x);
+		x++;
 	}
 }

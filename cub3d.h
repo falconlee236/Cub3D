@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:40:32 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:18:54 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,11 +170,7 @@ int		create_trgb(int t, int r, int g, int b);
 void	horizontal_raycast(t_screen *s);
 
 //ANCHOR - vertical raycast function
-void	set_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x);
-void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
-void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
-void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info);
-void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x);
+void	vertical_raycast(t_screen *s);
 
 //ANCHOR - minimap render function
 void	render_minimap(t_screen *s);

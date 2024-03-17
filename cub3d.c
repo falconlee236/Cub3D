@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:45:41 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:16:28 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,10 @@ void	leak_check(void)
 
 int	main_loop(t_screen *s)
 {
-	int					x;
-	t_vert_raycast_info	info;
-
 	if (s->re_buf == 1)
 		clear_buffer(s);
 	horizontal_raycast(s);
-	x = 0;
-	while (x < SCREEN_W)
-	{
-		set_vertical_raycast(s, &info, x);
-		init_vertical_raycast(s, &info);
-		doing_vertical_raycast(s, &info);
-		set_vertical_raycastinfo(s, &info);
-		drawing_vertical_raycast(s, &info, x);
-		x++;
-	}
+	vertical_raycast(s);
 	switch_buffer(s);
 	render_minimap(s);
 	key_hook_event(s);
