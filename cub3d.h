@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 21:17:40 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:33:39 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_screen{
 	void	*win;
 	int		**buf;
 	int		**texture;
+	int		*sprite_texture;
 	int		**sub_texture;
 	double	*z_buffer;
 	double	movespeed;

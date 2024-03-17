@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:18 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 21:13:17 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:33:51 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,12 @@ static void	doing_innner_sprite_raycast(
 		d = (y - info->movescreen) * 256
 			- SCREEN_H * 128 + info->sprite_h * 128;
 		info->text_cord.y = ((d * TEX_H) / info->sprite_h) / 256;
-		color = s->texture[g_sprite[info->sprite_order[i]].texture][
-			TEX_W * info->text_cord.y + info->text_cord.x];
+		if (g_sprite[info->sprite_order[i]].texture == 10)
+			color = s->sprite_texture[
+				TEX_W * info->text_cord.y + info->text_cord.x];
+		else
+			color = s->texture[g_sprite[info->sprite_order[i]].texture][
+				TEX_W * info->text_cord.y + info->text_cord.x];
 		if ((color & 0x00FFFFFF) != 0)
 			s->buf[y][stripe] = color;
 		y++;
