@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:41:10 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:42:22 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,6 @@ int	main(void)
 
 	atexit(leak_check);
 	init_struct(&s);
-	s.move.key_a = 0;
-	s.move.key_s = 0;
-	s.move.key_w = 0;
-	s.move.key_d = 0;
-	s.move.key_arr_l = 0;
-	s.move.key_arr_r = 0;
 	mlx_loop_hook(s.mlx, &main_loop, &s);
 	mlx_hook(s.win, ON_DESTROY, 0, &destory_hook_event, &s);
 	mlx_hook(s.win, X_EVENT_KEY_PRESS, 0, &key_press, &s);

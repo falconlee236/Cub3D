@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 17:24:29 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:43:01 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,21 @@ static void	load_texture(t_screen *s)
 	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
 }
 
+static void	init_movekey(t_screen *s)
+{
+	s->move.key_a = 0;
+	s->move.key_s = 0;
+	s->move.key_w = 0;
+	s->move.key_d = 0;
+	s->move.key_arr_l = 0;
+	s->move.key_arr_r = 0;
+}
+
 void	init_struct(t_screen *s)
 {
 	int	x;
 
+	init_movekey(s);
 	s->re_buf = 0;
 	s->mouse_toggle = 0;
 	s->mlx = mlx_init();
