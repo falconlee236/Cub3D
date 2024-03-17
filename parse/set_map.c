@@ -6,13 +6,13 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 22:56:23 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 09:25:42 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static void	set_row(char *line, int	line_idx, t_map *map)
+static void	set_row(char *line, int line_idx, t_map *map)
 {
 	size_t	i;
 	size_t	line_len;
