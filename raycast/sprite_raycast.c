@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:18 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 17:52:05 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:04:16 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	sort_order(t_pair *orders)
 	}
 }
 
-void	sort_sprites(int *sprite_order, double *sprite_dist)
+void	sort_sprites(t_sprite_raycast_info *info)
 {
 	t_pair	*sprites;
 	int		i;
@@ -92,48 +92,60 @@ void	sort_sprites(int *sprite_order, double *sprite_dist)
 	i = 0;
 	while (i < SPRITE_NUM)
 	{
-		sprites[i].first = sprite_dist[i];
-		sprites[i].second = sprite_order[i];
+		sprites[i].first = info->sprite_dist[i];
+		sprites[i].second = info->sprite_order[i];
 		i++;
 	}
 	sort_order(sprites);
 	i = 0;
 	while (i < SPRITE_NUM)
 	{
-		sprite_dist[i] = sprites[SPRITE_NUM - i - 1].first;
-		sprite_order[i] = sprites[SPRITE_NUM - i - 1].second;
+		info->sprite_dist[i] = sprites[SPRITE_NUM - i - 1].first;
+		info->sprite_order[i] = sprites[SPRITE_NUM - i - 1].second;
 		i++;
 	}
 	free(sprites);
 }
 
-int	cal_sprite_raycast(t_screen *s, int *sprite_order, double *sprite_dist)
+int	set_sprite_raycast(t_screen *s, t_sprite_raycast_info *info)
 {
 	int	i;
 
-	if (!sprite_order || !sprite_dist)
-		return (1);
+	info->sprite_order = (int *)malloc(sizeof(int) * SPRITE_NUM);
+	info->sprite_dist = (double *)malloc(sizeof(double) * SPRITE_NUM);
+	if (!info->sprite_order || !info->sprite_dist)
+		exit(0);
 	i = 0;
 	while (i < SPRITE_NUM)
 	{
-		sprite_order[i] = i;
-		sprite_dist[i] = ((s->pos.x - sprite[i].x) * (s->pos.x - sprite[i].x)
+		info->sprite_order[i] = i;
+		info->sprite_dist[i] = (
+				(s->pos.x - sprite[i].x) * (s->pos.x - sprite[i].x)
 				+ (s->pos.y - sprite[i].y) * (s->pos.y - sprite[i].y));
 		i++;
 	}
-	sort_sprites(sprite_order, sprite_dist);
+	sort_sprites(info);
 	return (0);
+}
+
+void	cal_sprite_raycast(t_screen *s, t_sprite_raycast_info *info, int i)
+{
+	info->sprite_pos.x = sprite[info->sprite_order[i]].x - s->pos.x;
+	info->sprite_pos.y = sprite[info->sprite_order[i]].y - s->pos.y;
 }
 
 void	sprite_raycast(t_screen *s)
 {
-	int		*sprite_order;
-	double	*sprite_dist;
+	int						i;
+	t_sprite_raycast_info	info;
 
-	sprite_order = (int *)malloc(sizeof(int) * SPRITE_NUM);
-	sprite_dist = (double *)malloc(sizeof(double) * SPRITE_NUM);
-	if (cal_sprite_raycast(s, sprite_order, sprite_dist))
-		exit(0);
-	free(sprite_order);
-	free(sprite_dist);
+	set_sprite_raycast(s, &info);
+	i = 0;
+	while (i < SPRITE_NUM)
+	{
+		cal_sprite_raycast(s, &info, i);
+		i++;
+	}
+	free(info.sprite_order);
+	free(info.sprite_dist);
 }

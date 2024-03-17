@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 17:36:23 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:00:55 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,14 @@ typedef struct s_hori_raycast_info{
 	t_vec	floor_step;
 	t_vec	floor_cord;
 }	t_hori_raycast_info;
+//!SECTION
+
+//SECTION - sprite ray casting struct
+typedef struct s_sprite_raycast_info{
+	int		*sprite_order;
+	double	*sprite_dist;
+	t_vec	sprite_pos;
+}	t_sprite_raycast_info;
 //!SECTION
 
 //SECTION - key move struct
