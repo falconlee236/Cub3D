@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:37:16 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:40:32 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,9 @@ void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
 void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
 void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info);
 void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x);
+
+//ANCHOR - minimap render function
+void	render_minimap(t_screen *s);
 
 //ANCHOR - player move function
 void	move_front_back(t_screen *s);

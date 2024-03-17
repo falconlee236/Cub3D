@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:37:00 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:41:10 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,83 +44,6 @@ void	leak_check(void)
 	system("leaks cub3D");
 }
 
-void	fill_squres(t_img *m_map, int x, int y, int color)
-{
-	int	i;
-	int	j;
-	int	idx;
-
-	j = 0;
-	idx = MINI_SCALE * SCREEN_W;
-	while (j < (int)(MINI_SCALE * TILE_SIZE))
-	{
-		i = 0;
-		while (i < (int)(MINI_SCALE * TILE_SIZE))
-		{
-			m_map->addr[idx * (y + j) + (x + i)] = color;
-			i++;
-		}
-		j++;
-	}
-}
-
-void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
-{
-	if ((int)s->pos.x - MAP_NUM_ROWS / 2 + x < 0)
-		conv_cord->x = 0;
-	else if ((int)s->pos.x - MAP_NUM_ROWS / 2 + x >= 24)
-		conv_cord->x = 23;
-	else
-		conv_cord->x = (int)s->pos.x - MAP_NUM_ROWS / 2 + x;
-	if ((int)s->pos.y - MAP_NUM_COLS / 2 + y < 0)
-		conv_cord->y = 0;
-	else if ((int)s->pos.y - MAP_NUM_COLS / 2 + y >= 24)
-		conv_cord->y = 23;
-	else
-		conv_cord->y = (int)s->pos.y - MAP_NUM_COLS / 2 + y;
-}
-
-void	decide_color_and_drawing(
-	t_screen *s, t_img m_map, t_pos conv_cord, t_pos cord)
-{
-	if (g_worldmap[conv_cord.x][conv_cord.y])
-		fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
-			(int)(MINI_SCALE * TILE_SIZE * cord.x), 0x000000);
-	else
-		fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
-			(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xffffff);
-	if (conv_cord.x == (int)s->pos.x && conv_cord.y == (int)s->pos.y)
-		fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
-			(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xff0000);
-}
-
-void	render_map(t_screen *s)
-{
-	t_img		m_map;
-	t_pos		conv_cord;
-	t_pos		cord;
-
-	m_map.ptr = mlx_new_image(
-			s->mlx, (int)(MINI_SCALE * SCREEN_W), (int)(MINI_SCALE * SCREEN_H));
-	m_map.addr = (unsigned int *)mlx_get_data_addr(m_map.ptr,
-			&(m_map.bits_per_pixel), &(m_map.size_line), &(m_map.endian));
-	cord.x = 0;
-	while (cord.x < MAP_NUM_ROWS)
-	{
-		cord.y = 0;
-		while (cord.y < MAP_NUM_COLS)
-		{
-			cord_convert(s, cord.x, cord.y, &conv_cord);
-			decide_color_and_drawing(s, m_map, conv_cord, cord);
-			cord.y++;
-		}
-		cord.x++;
-	}
-	mlx_put_image_to_window(s->mlx, s->win, m_map.ptr,
-		(int)(SCREEN_W * (1.11 - MINI_SCALE)),
-		(int)(SCREEN_H * (1.11 - MINI_SCALE)));
-}
-
 int	main_loop(t_screen *s)
 {
 	int					x;
@@ -140,11 +63,10 @@ int	main_loop(t_screen *s)
 		x++;
 	}
 	switch_buffer(s);
-	render_map(s);
+	render_minimap(s);
 	key_hook_event(s);
 	return (0);
 }
-
 
 //LINK - Main.c
 int	main(void)
