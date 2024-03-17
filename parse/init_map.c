@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 22:52:33 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 09:24:39 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,22 @@ static int	check_filename(char *str)
 	return (1);
 }
 
-int	init_map(int argc, char **argv, t_map *map)
+static void	init_variable(t_map *map)
 {
+	map->map = NULL;
+	map->floor_color = NULL;
+	map->east_texture = NULL;
+	map->west_texture = NULL;
+	map->north_texture = NULL;
+	map->south_texture = NULL;
+	map->init_direction = 0;
 	map->max_height = 0;
 	map->max_width = 0;
+}
+
+int	init_map(int argc, char **argv, t_map *map)
+{
+	init_variable(map);
 	if (argc != 2 || !argv || !(argv[1])
 		|| !check_filename(argv[1])
 		|| !set_map_size(argv[1], map)
