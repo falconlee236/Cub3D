@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 21:19:09 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 22:38:49 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 09:16:23 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	free_map(t_map *map)
 			free((map->map)[i]);
 		i++;
 	}
-	if (map->map)
+	if (map && map->map)
 		free(map->map);
 	return (-1);
 }
