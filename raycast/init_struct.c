@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 16:43:01 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:37:08 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ static void	init_movekey(t_screen *s)
 	s->move.key_d = 0;
 	s->move.key_arr_l = 0;
 	s->move.key_arr_r = 0;
+	s->pos = vec_new(22, 11.5);
+	s->dir = vec_new(-1, 0);
+	s->plane = vec_new(0, 0.66);
+	s->movespeed = MOVESPEED;
+	s->rotspeed = ROTSPEED;
 }
 
 void	init_struct(t_screen *s)
 {
 	int	x;
 
-	init_movekey(s);
 	s->re_buf = 0;
 	s->mouse_toggle = 0;
 	s->mlx = mlx_init();
@@ -79,10 +83,7 @@ void	init_struct(t_screen *s)
 	x = -1;
 	while (++x < 8)
 		s->texture[x] = (int *)malloc(sizeof(int) * (TEX_W * TEX_H));
+	s->z_buffer = (double *)malloc(sizeof(double) * SCREEN_W);
 	load_texture(s);
-	s->pos = vec_new(22, 11.5);
-	s->dir = vec_new(-1, 0);
-	s->plane = vec_new(0, 0.66);
-	s->movespeed = MOVESPEED;
-	s->rotspeed = ROTSPEED;
+	init_movekey(s);
 }

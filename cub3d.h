@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 17:18:54 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:36:23 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_screen{
 	void	*win;
 	int		**buf;
 	int		**texture;
+	double	*z_buffer;
 	double	movespeed;
 	double	rotspeed;
 	int		re_buf;
@@ -171,6 +172,9 @@ void	horizontal_raycast(t_screen *s);
 
 //ANCHOR - vertical raycast function
 void	vertical_raycast(t_screen *s);
+
+//ANCHOR - sprite raycast function
+void	sprite_raycast(t_screen *s);
 
 //ANCHOR - minimap render function
 void	render_minimap(t_screen *s);

@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 17:16:28 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:22:05 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main_loop(t_screen *s)
 		clear_buffer(s);
 	horizontal_raycast(s);
 	vertical_raycast(s);
+	sprite_raycast(s);
 	switch_buffer(s);
 	render_minimap(s);
 	key_hook_event(s);
