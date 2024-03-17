@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:18 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 18:04:16 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:04:04 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,74 @@ int	set_sprite_raycast(t_screen *s, t_sprite_raycast_info *info)
 	return (0);
 }
 
-void	cal_sprite_raycast(t_screen *s, t_sprite_raycast_info *info, int i)
+void	det_sprite_raycast(t_screen *s, t_sprite_raycast_info *info, int i)
 {
-	info->sprite_pos.x = sprite[info->sprite_order[i]].x - s->pos.x;
-	info->sprite_pos.y = sprite[info->sprite_order[i]].y - s->pos.y;
+	double	det;
+	t_vec	sprite_pos;
+
+	sprite_pos.x = sprite[info->sprite_order[i]].x - s->pos.x;
+	sprite_pos.y = sprite[info->sprite_order[i]].y - s->pos.y;
+	det = 1.0 / (s->plane.x * s->dir.y - s->dir.x * s->plane.y);
+	info->trans_pos.x = det * (
+			s->dir.y * sprite_pos.x - s->dir.x * sprite_pos.y);
+	info->trans_pos.y = det * (
+			-s->plane.y * sprite_pos.x + s->plane.x * sprite_pos.y);
+	info->sprite_screen_x = (int)((SCREEN_W / 2) * (
+				1 + info->trans_pos.x / info->trans_pos.y));
+}
+
+void	cal_sprite_raycast(t_sprite_raycast_info *info)
+{
+	info->movescreen = (int)(MOVE / info->trans_pos.y);
+	info->sprite_h = (int)fabs((SCREEN_H / info->trans_pos.y));
+	info->draw_start_y = -info->sprite_h / 2 + SCREEN_H / 2
+		+ info->movescreen;
+	if (info->draw_start_y < 0)
+		info->draw_start_y = 0;
+	info->draw_end_y = info->sprite_h / 2 + SCREEN_H / 2 
+		+ info->movescreen;
+	if (info->draw_end_y >= SCREEN_H)
+		info->draw_end_y = SCREEN_H - 1;
+	info->sprite_w = (int)fabs((SCREEN_H / info->trans_pos.y));
+	info->draw_start_x = -info->sprite_w / 2 + info->sprite_screen_x;
+	if (info->draw_start_x < 0)
+		info->draw_start_x = 0;
+	info->draw_end_x = info->sprite_w / 2 + info->sprite_screen_x;
+	if (info->draw_end_x >= SCREEN_W)
+		info->draw_end_x = SCREEN_W - 1;
+}
+
+void	doing_sprite_raycast(
+	t_screen *s, t_sprite_raycast_info *info, int i)
+{
+	int		stripe;
+	int		d;
+	int		color;
+	int		y;
+	t_pos	text_cord;
+
+	stripe = info->draw_start_x;
+	while (stripe < info->draw_end_x)
+	{
+		text_cord.x = (int)((256 * (stripe - (-info->sprite_w / 2
+							+ info->sprite_screen_x))
+					* TEX_W / info->sprite_w) / 256);
+		if (info->trans_pos.y > 0 && stripe > 0 && stripe < SCREEN_W
+			&& info->trans_pos.y < s->z_buffer[stripe])
+		{
+			y = info->draw_start_y;
+			while (y < info->draw_end_y)
+			{
+				d = (y - info->movescreen) * 256 - SCREEN_H * 128 + info->sprite_h * 128;
+				text_cord.y = ((d * TEX_H) / info->sprite_h) / 256;
+				color = s->texture[sprite[info->sprite_order[i]].texture][TEX_W * text_cord.y + text_cord.x];
+				if ((color & 0x00FFFFFF) != 0)
+					s->buf[y][stripe] = color;
+				y++;
+			}
+		}
+		stripe++;
+	}
 }
 
 void	sprite_raycast(t_screen *s)
@@ -143,7 +207,9 @@ void	sprite_raycast(t_screen *s)
 	i = 0;
 	while (i < SPRITE_NUM)
 	{
-		cal_sprite_raycast(s, &info, i);
+		det_sprite_raycast(s, &info, i);
+		cal_sprite_raycast(&info);
+		doing_sprite_raycast(s, &info, i);
 		i++;
 	}
 	free(info.sprite_order);

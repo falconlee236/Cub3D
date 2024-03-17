@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 17:37:08 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:03:42 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static void	load_texture(t_screen *s)
 	load_image(s, s->texture[5], "textures/mossy.xpm", &img);
 	load_image(s, s->texture[6], "textures/wood.xpm", &img);
 	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
+	load_image(s, s->texture[8], "textures/barrel.xpm", &img);
+	load_image(s, s->texture[9], "textures/pillar.xpm", &img);
+	load_image(s, s->texture[10], "textures/greenlight.xpm", &img);
 }
 
 static void	init_movekey(t_screen *s)
@@ -79,9 +82,9 @@ void	init_struct(t_screen *s)
 	x = -1;
 	while (++x < SCREEN_H)
 		s->buf[x] = (int *)malloc(sizeof(int) * SCREEN_W);
-	s->texture = (int **)malloc(sizeof(int *) * 8);
+	s->texture = (int **)malloc(sizeof(int *) * 11);
 	x = -1;
-	while (++x < 8)
+	while (++x < 11)
 		s->texture[x] = (int *)malloc(sizeof(int) * (TEX_W * TEX_H));
 	s->z_buffer = (double *)malloc(sizeof(double) * SCREEN_W);
 	load_texture(s);

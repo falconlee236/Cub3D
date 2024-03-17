@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 18:00:55 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:48:12 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 //SECTION - Game Play Parameter
 # define MOVESPEED 0.05
 # define ROTSPEED 3
+# define MOVE 0.5
 //!SECTION
 
 //SECTION - Map Parameter
@@ -99,7 +100,15 @@ typedef struct s_hori_raycast_info{
 typedef struct s_sprite_raycast_info{
 	int		*sprite_order;
 	double	*sprite_dist;
-	t_vec	sprite_pos;
+	int		movescreen;
+	int		sprite_screen_x;
+	int		sprite_h;
+	int		sprite_w;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		draw_start_y;
+	int		draw_end_y;
+	t_vec	trans_pos;
 }	t_sprite_raycast_info;
 //!SECTION
 
