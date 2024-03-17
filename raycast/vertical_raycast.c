@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 17:20:14 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:53:08 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	vertical_raycast(t_screen *s)
 		doing_vertical_raycast(s, &info);
 		set_vertical_raycastinfo(s, &info);
 		drawing_vertical_raycast(s, &info, x);
+		s->z_buffer[x] = info.prep_wall_dist;
 		x++;
 	}
 }
