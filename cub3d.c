@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 19:39:58 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:22:28 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int	main_loop(t_screen *s)
 	static int	cnt;
 
 	cnt++;
-	s->texture[8] = s->texture[(cnt / 20) % 10];
-	s->texture[9] = s->texture[(cnt / 20) % 10];
+	s->texture[10] = s->sub_texture[(cnt / 4) % 4];
 	if (s->re_buf == 1)
 		clear_buffer(s);
 	horizontal_raycast(s);

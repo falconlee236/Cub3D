@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 19:03:42 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:20:41 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ static void	load_texture(t_screen *s)
 	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
 	load_image(s, s->texture[8], "textures/barrel.xpm", &img);
 	load_image(s, s->texture[9], "textures/pillar.xpm", &img);
-	load_image(s, s->texture[10], "textures/greenlight.xpm", &img);
+	// load_image(s, s->texture[10], "textures/greenlight.xpm", &img);
+	load_image(s, s->sub_texture[0], "textures/colorstone.xpm", &img);
+	load_image(s, s->sub_texture[1], "textures/barrel.xpm", &img);
+	load_image(s, s->sub_texture[2], "textures/pillar.xpm", &img);
+	load_image(s, s->sub_texture[3], "textures/greenlight.xpm", &img);
 }
 
 static void	init_movekey(t_screen *s)
@@ -87,6 +91,10 @@ void	init_struct(t_screen *s)
 	while (++x < 11)
 		s->texture[x] = (int *)malloc(sizeof(int) * (TEX_W * TEX_H));
 	s->z_buffer = (double *)malloc(sizeof(double) * SCREEN_W);
+	s->sub_texture = (int **)malloc(sizeof(int *) * 4);
+	x = -1;
+	while (++x < 4)
+		s->sub_texture[x] = (int *)malloc(sizeof(int) * (TEX_W * TEX_H));
 	load_texture(s);
 	init_movekey(s);
 }
