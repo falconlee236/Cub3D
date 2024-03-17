@@ -6,21 +6,11 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/17 11:19:20 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 11:46:22 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-static int	is_data(char *str)
-{
-	if (ft_strlen(str) > 2)
-		return (1);
-	if (str[0] == 'N' || str[0] == 'S' || str[0] == 'E' || str[0] == 'W'
-		|| str[0] == 'F' || str[0] == 'C')
-		return (1);
-	return (0);
-}
 
 static void	skip_lines(int fd, char **tmp_line)
 {
