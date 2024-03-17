@@ -6,11 +6,32 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/17 09:25:42 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 11:19:20 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+static int	is_data(char *str)
+{
+	if (ft_strlen(str) > 2)
+		return (1);
+	if (str[0] == 'N' || str[0] == 'S' || str[0] == 'E' || str[0] == 'W'
+		|| str[0] == 'F' || str[0] == 'C')
+		return (1);
+	return (0);
+}
+
+static void	skip_lines(int fd, char **tmp_line)
+{
+	while (1)
+	{
+		*tmp_line = get_next_line(fd);
+		if (is_data(*tmp_line))
+			break ;
+		free(*tmp_line);
+	}
+}
 
 static void	set_row(char *line, int line_idx, t_map *map)
 {
@@ -40,7 +61,10 @@ int	set_map(char *filename, t_map *map)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	i = 0;
+	skip_lines(fd, &tmp_line);
+	set_row(tmp_line, 0, map);
+	free(tmp_line);
+	i = 1;
 	while (i < map->max_height)
 	{
 		tmp_line = get_next_line(fd);
