@@ -6,11 +6,13 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:53:16 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 21:08:36 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:14:03 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+extern t_sprite	g_sprite[SPRITE_NUM];
 
 void	sort_order(t_pair *orders)
 {
@@ -78,8 +80,8 @@ int	set_sprite_raycast(t_screen *s, t_sprite_raycast_info *info)
 	{
 		info->sprite_order[i] = i;
 		info->sprite_dist[i] = (
-				(s->pos.x - sprite[i].x) * (s->pos.x - sprite[i].x)
-				+ (s->pos.y - sprite[i].y) * (s->pos.y - sprite[i].y));
+				(s->pos.x - g_sprite[i].x) * (s->pos.x - g_sprite[i].x)
+				+ (s->pos.y - g_sprite[i].y) * (s->pos.y - g_sprite[i].y));
 		i++;
 	}
 	sort_sprites(info);
@@ -91,8 +93,8 @@ void	det_sprite_raycast(t_screen *s, t_sprite_raycast_info *info, int i)
 	double	det;
 	t_vec	sprite_pos;
 
-	sprite_pos.x = sprite[info->sprite_order[i]].x - s->pos.x;
-	sprite_pos.y = sprite[info->sprite_order[i]].y - s->pos.y;
+	sprite_pos.x = g_sprite[info->sprite_order[i]].x - s->pos.x;
+	sprite_pos.y = g_sprite[info->sprite_order[i]].y - s->pos.y;
 	det = 1.0 / (s->plane.x * s->dir.y - s->dir.x * s->plane.y);
 	info->trans_pos.x = det * (
 			s->dir.y * sprite_pos.x - s->dir.x * sprite_pos.y);

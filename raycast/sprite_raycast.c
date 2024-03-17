@@ -6,11 +6,39 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:18 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 21:09:42 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:13:17 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+t_sprite	g_sprite[SPRITE_NUM] =
+{		
+	{20.5, 11.5, 10}, //green light in front of playerstart
+	//green lights in every room
+	{18.5,4.5, 10},
+	{10.0,4.5, 10},
+	{10.0,12.5,10},
+	{3.5, 6.5, 10},
+	{3.5, 20.5,10},
+	{3.5, 14.5,10},
+	{14.5,20.5,10},
+
+	//row of pillars in front of wall: fisheye test
+	{18.5, 10.5, 9},
+	{18.5, 11.5, 9},
+	{18.5, 12.5, 9},
+
+	//some barrels around the map
+	{21.5, 1.5, 8},
+	{15.5, 1.5, 8},
+	{16.0, 1.8, 8},
+	{16.2, 1.2, 8},
+	{3.5,  2.5, 8},
+	{9.5, 15.5, 8},
+	{10.0, 15.1,8},
+	{10.5, 15.8,8},
+};
 
 static void	cal_sprite_raycast(t_sprite_raycast_info *info)
 {
@@ -46,7 +74,7 @@ static void	doing_innner_sprite_raycast(
 		d = (y - info->movescreen) * 256
 			- SCREEN_H * 128 + info->sprite_h * 128;
 		info->text_cord.y = ((d * TEX_H) / info->sprite_h) / 256;
-		color = s->texture[sprite[info->sprite_order[i]].texture][
+		color = s->texture[g_sprite[info->sprite_order[i]].texture][
 			TEX_W * info->text_cord.y + info->text_cord.x];
 		if ((color & 0x00FFFFFF) != 0)
 			s->buf[y][stripe] = color;
@@ -72,7 +100,7 @@ static void	doing_sprite_raycast(
 	}
 }
 
-static void	sprite_raycast(t_screen *s)
+void	sprite_raycast(t_screen *s)
 {
 	int						i;
 	t_sprite_raycast_info	info;

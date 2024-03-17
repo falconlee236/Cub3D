@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 21:09:20 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:12:35 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,34 +80,6 @@ typedef struct s_sprite
 	double		y;
 	int			texture;
 }	t_sprite;	
-
-t_sprite	sprite[SPRITE_NUM] =
-{		
-	{20.5, 11.5, 10}, //green light in front of playerstart
-	//green lights in every room
-	{18.5,4.5, 10},
-	{10.0,4.5, 10},
-	{10.0,12.5,10},
-	{3.5, 6.5, 10},
-	{3.5, 20.5,10},
-	{3.5, 14.5,10},
-	{14.5,20.5,10},
-
-	//row of pillars in front of wall: fisheye test
-	{18.5, 10.5, 9},
-	{18.5, 11.5, 9},
-	{18.5, 12.5, 9},
-
-	//some barrels around the map
-	{21.5, 1.5, 8},
-	{15.5, 1.5, 8},
-	{16.0, 1.8, 8},
-	{16.2, 1.2, 8},
-	{3.5,  2.5, 8},
-	{9.5, 15.5, 8},
-	{10.0, 15.1,8},
-	{10.5, 15.8,8},
-};
 
 typedef struct s_pair{
 	double	first;
