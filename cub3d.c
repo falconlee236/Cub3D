@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:28:56 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:31:10 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,19 @@ void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
 		conv_cord->y = (int)s->pos.y - MAP_NUM_COLS / 2 + y;
 }
 
-// void	decide_color_and_drawing(
-// 	t_screen *s, t_img *map, t_pos *conv_cord, t_pos *pos)
-// {
-	
-// }
+void	decide_color_and_drawing(
+	t_screen *s, t_img m_map, t_pos conv_cord, t_pos cord)
+{
+	if (g_worldmap[conv_cord.x][conv_cord.y])
+		fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
+			(int)(MINI_SCALE * TILE_SIZE * cord.x), 0x000000);
+	else
+		fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
+			(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xffffff);
+	if (conv_cord.x == (int)s->pos.x && conv_cord.y == (int)s->pos.y)
+		fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
+			(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xff0000);
+}
 
 void	render_map(t_screen *s)
 {
@@ -103,15 +111,7 @@ void	render_map(t_screen *s)
 		while (cord.y < MAP_NUM_COLS)
 		{
 			cord_convert(s, cord.x, cord.y, &conv_cord);
-			if (g_worldmap[conv_cord.x][conv_cord.y])
-				fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
-					(int)(MINI_SCALE * TILE_SIZE * cord.x), 0x000000);
-			else
-				fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
-					(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xffffff);
-			if (conv_cord.x == (int)s->pos.x && conv_cord.y == (int)s->pos.y)
-				fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
-					(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xff0000);
+			decide_color_and_drawing(s, m_map, conv_cord, cord);
 			cord.y++;
 		}
 		cord.x++;
