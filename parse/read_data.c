@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 09:39:41 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/17 11:45:56 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 11:47:43 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	read_data(char *str, int *data_cnt, int *is_ok, t_map *map)
 	(void)is_ok;
 	(void)map;
 	if (!is_data(str))
+		return (0);
+	if (!valid_data(str))
 		return (0);
 	// Set DAta Value / data_cnt ++
 	// Check if All Data Loaded
