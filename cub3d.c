@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:24:02 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:26:47 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,37 +88,37 @@ void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
 
 void	render_map(t_screen *s)
 {
-	int			x;
-	int			y;
 	t_img		map;
 	t_pos		conv_cord;
+	t_pos		cord;
 
 	map.ptr = mlx_new_image(
 			s->mlx, (int)(MINI_SCALE * SCREEN_W), (int)(MINI_SCALE * SCREEN_H));
 	map.addr = (unsigned int *)mlx_get_data_addr(map.ptr,
 			&(map.bits_per_pixel), &(map.size_line), &(map.endian));
-	x = 0;
-	while (x < MAP_NUM_ROWS)
+	cord.x = 0;
+	while (cord.x < MAP_NUM_ROWS)
 	{
-		y = 0;
-		while (y < MAP_NUM_COLS)
+		cord.y = 0;
+		while (cord.y < MAP_NUM_COLS)
 		{
-			cord_convert(s, x, y, &conv_cord);
+			cord_convert(s, cord.x, cord.y, &conv_cord);
 			if (g_worldmap[conv_cord.x][conv_cord.y])
-				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * y),
-					(int)(MINI_SCALE * TILE_SIZE * x), 0x000000);
+				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
+					(int)(MINI_SCALE * TILE_SIZE * cord.x), 0x000000);
 			else
-				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * y),
-					(int)(MINI_SCALE * TILE_SIZE * x), 0xffffff);
+				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
+					(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xffffff);
 			if (conv_cord.x == (int)s->pos.x && conv_cord.y == (int)s->pos.y)
-				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * y),
-					(int)(MINI_SCALE * TILE_SIZE * x), 0xff0000);
-			y++;
+				fill_squres(&map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
+					(int)(MINI_SCALE * TILE_SIZE * cord.x), 0xff0000);
+			cord.y++;
 		}
-		x++;
+		cord.x++;
 	}
 	mlx_put_image_to_window(s->mlx, s->win, map.ptr,
-		(int)(SCREEN_W * (1.11 - MINI_SCALE)), (int)(SCREEN_H * (1.11 - MINI_SCALE)));
+		(int)(SCREEN_W * (1.11 - MINI_SCALE)),
+		(int)(SCREEN_H * (1.11 - MINI_SCALE)));
 }
 
 int	main_loop(t_screen *s)
