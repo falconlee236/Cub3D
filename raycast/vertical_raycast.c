@@ -6,13 +6,25 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 15:13:57 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:37:05 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 extern int	g_worldmap[24][24];
+
+void	set_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x)
+{
+	double	camera_x;
+
+	info->hit = 0;
+	camera_x = 2 * x / (double)SCREEN_W - 1;
+	info->raydir = vec_add(s->dir, vec_mul(s->plane, camera_x));
+	info->map_pos = pos_new((int)s->pos.x, (int)s->pos.y);
+	info->deltadist = vec_new(
+			fabs(1 / info->raydir.x), fabs(1 / info->raydir.y));
+}
 
 void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 {

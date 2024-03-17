@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:31:10 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:37:00 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ void	render_map(t_screen *s)
 int	main_loop(t_screen *s)
 {
 	int					x;
-	double				camera_x;
 	t_vert_raycast_info	info;
 
 	if (s->re_buf == 1)
@@ -133,12 +132,7 @@ int	main_loop(t_screen *s)
 	x = 0;
 	while (x < SCREEN_W)
 	{
-		info.hit = 0;
-		camera_x = 2 * x / (double)SCREEN_W - 1;
-		info.raydir = vec_add(s->dir, vec_mul(s->plane, camera_x));
-		info.map_pos = pos_new((int)s->pos.x, (int)s->pos.y);
-		info.deltadist = vec_new(
-				fabs(1 / info.raydir.x), fabs(1 / info.raydir.y));
+		set_vertical_raycast(s, &info, x);
 		init_vertical_raycast(s, &info);
 		doing_vertical_raycast(s, &info);
 		set_vertical_raycastinfo(s, &info);
