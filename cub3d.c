@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:05 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:21:20 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	leak_check(void)
 
 int	main_loop(t_screen *s)
 {
+	static int	cnt;
+
+	cnt++;
+	s->texture[9] = s->texture[(cnt / 20) % 10];
 	if (s->re_buf == 1)
 		clear_buffer(s);
 	horizontal_raycast(s);

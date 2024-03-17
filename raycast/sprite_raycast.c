@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:18 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 19:04:04 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:25:19 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,9 @@ void	cal_sprite_raycast(t_sprite_raycast_info *info)
 		info->draw_end_x = SCREEN_W - 1;
 }
 
+// void	doing_innner_sprite_raycast()
+
+
 void	doing_sprite_raycast(
 	t_screen *s, t_sprite_raycast_info *info, int i)
 {
@@ -186,9 +189,11 @@ void	doing_sprite_raycast(
 			y = info->draw_start_y;
 			while (y < info->draw_end_y)
 			{
-				d = (y - info->movescreen) * 256 - SCREEN_H * 128 + info->sprite_h * 128;
+				d = (y - info->movescreen) * 256
+					- SCREEN_H * 128 + info->sprite_h * 128;
 				text_cord.y = ((d * TEX_H) / info->sprite_h) / 256;
-				color = s->texture[sprite[info->sprite_order[i]].texture][TEX_W * text_cord.y + text_cord.x];
+				color = s->texture[sprite[info->sprite_order[i]].texture][
+					TEX_W * text_cord.y + text_cord.x];
 				if ((color & 0x00FFFFFF) != 0)
 					s->buf[y][stripe] = color;
 				y++;
