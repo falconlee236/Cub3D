@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/10 17:24:29 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:30:09 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,27 @@ static void	load_texture(t_screen *s)
 	load_image(s, s->texture[5], "textures/mossy.xpm", &img);
 	load_image(s, s->texture[6], "textures/wood.xpm", &img);
 	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
+	load_image(s, s->texture[8], "textures/barrel.xpm", &img);
+	load_image(s, s->texture[9], "textures/pillar.xpm", &img);
+	load_image(s, s->sub_texture[0], "textures/colorstone.xpm", &img);
+	load_image(s, s->sub_texture[1], "textures/barrel.xpm", &img);
+	load_image(s, s->sub_texture[2], "textures/pillar.xpm", &img);
+	load_image(s, s->sub_texture[3], "textures/greenlight.xpm", &img);
+}
+
+static void	init_movekey(t_screen *s)
+{
+	s->move.key_a = 0;
+	s->move.key_s = 0;
+	s->move.key_w = 0;
+	s->move.key_d = 0;
+	s->move.key_arr_l = 0;
+	s->move.key_arr_r = 0;
+	s->pos = vec_new(22, 11.5);
+	s->dir = vec_new(-1, 0);
+	s->plane = vec_new(0, 0.66);
+	s->movespeed = MOVESPEED;
+	s->rotspeed = ROTSPEED;
 }
 
 void	init_struct(t_screen *s)
@@ -64,14 +85,15 @@ void	init_struct(t_screen *s)
 	x = -1;
 	while (++x < SCREEN_H)
 		s->buf[x] = (int *)malloc(sizeof(int) * SCREEN_W);
-	s->texture = (int **)malloc(sizeof(int *) * 8);
+	s->texture = (int **)malloc(sizeof(int *) * 10);
 	x = -1;
-	while (++x < 8)
+	while (++x < 10)
 		s->texture[x] = (int *)malloc(sizeof(int) * (TEX_W * TEX_H));
+	s->z_buffer = (double *)malloc(sizeof(double) * SCREEN_W);
+	s->sub_texture = (int **)malloc(sizeof(int *) * 4);
+	x = -1;
+	while (++x < 4)
+		s->sub_texture[x] = (int *)malloc(sizeof(int) * (TEX_W * TEX_H));
 	load_texture(s);
-	s->pos = vec_new(22, 11.5);
-	s->dir = vec_new(-1, 0);
-	s->plane = vec_new(0, 0.66);
-	s->movespeed = MOVESPEED;
-	s->rotspeed = ROTSPEED;
+	init_movekey(s);
 }

@@ -1,9 +1,10 @@
 NAME=cub3D
-CFLAGS=cc -Wall -Wextra -Werror -o
+CFLAGS=cc -Wall -Wextra -Werror -g
 
 SRCS=cub3d.c \
 		$(wildcard parse/*.c) \
 		$(wildcard raycast/*.c) \
+		$(wildcard player/*.c) \
 		$(wildcard vector/*.c)
 
 all: $(NAME)
@@ -11,7 +12,7 @@ all: $(NAME)
 $(NAME):
 	@$(MAKE) -C mlx all
 	@$(MAKE) -C libft all
-	$(CFLAGS) $(NAME) $(SRCS) -L ./mlx -lmlx -framework OpenGL -framework Appkit -L ./libft -lft
+	$(CFLAGS) -o $(NAME) $(SRCS) -L ./mlx -lmlx -framework OpenGL -framework Appkit -L ./libft -lft
 
 clean:
 	@$(MAKE) -C mlx clean

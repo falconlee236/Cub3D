@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 09:16:12 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 21:33:39 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 //SECTION - Game Play Parameter
 # define MOVESPEED 0.05
 # define ROTSPEED 3
+# define MOVE 0.5
 //!SECTION
 
 //SECTION - Map Parameter
@@ -70,6 +71,22 @@ typedef struct s_pos{
 }	t_pos;
 //!SECTION
 
+//SECTION - Sprite Sturct
+# define SPRITE_NUM 19
+
+typedef struct s_sprite
+{
+	double		x;
+	double		y;
+	int			texture;
+}	t_sprite;	
+
+typedef struct s_pair{
+	double	first;
+	int		second;
+}	t_pair;
+//!SECTION
+
 //SECTION - wall Ray casting struct
 typedef struct s_vert_raycast_info{
 	t_vec	raydir;
@@ -93,6 +110,23 @@ typedef struct s_hori_raycast_info{
 	t_vec	floor_step;
 	t_vec	floor_cord;
 }	t_hori_raycast_info;
+//!SECTION
+
+//SECTION - sprite ray casting struct
+typedef struct s_sprite_raycast_info{
+	int		*sprite_order;
+	double	*sprite_dist;
+	int		movescreen;
+	int		sprite_screen_x;
+	int		sprite_h;
+	int		sprite_w;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		draw_start_y;
+	int		draw_end_y;
+	t_vec	trans_pos;
+	t_pos	text_cord;
+}	t_sprite_raycast_info;
 //!SECTION
 
 //SECTION - key move struct
@@ -121,6 +155,9 @@ typedef struct s_screen{
 	void	*win;
 	int		**buf;
 	int		**texture;
+	int		*sprite_texture;
+	int		**sub_texture;
+	double	*z_buffer;
 	double	movespeed;
 	double	rotspeed;
 	int		re_buf;
@@ -176,10 +213,17 @@ int		create_trgb(int t, int r, int g, int b);
 void	horizontal_raycast(t_screen *s);
 
 //ANCHOR - vertical raycast function
-void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
-void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info);
-void	set_vertical_raycastinfo(t_screen *s, t_vert_raycast_info *info);
-void	drawing_vertical_raycast(t_screen *s, t_vert_raycast_info *info, int x);
+void	vertical_raycast(t_screen *s);
+
+//ANCHOR - sprite raycast function
+void	sprite_raycast(t_screen *s);
+void	sort_order(t_pair *orders);
+void	sort_sprites(t_sprite_raycast_info *info);
+int		set_sprite_raycast(t_screen *s, t_sprite_raycast_info *info);
+void	det_sprite_raycast(t_screen *s, t_sprite_raycast_info *info, int i);
+
+//ANCHOR - minimap render function
+void	render_minimap(t_screen *s);
 
 //ANCHOR - player move function
 void	move_front_back(t_screen *s);
