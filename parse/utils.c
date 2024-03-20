@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_map.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 21:19:09 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/17 09:16:23 by yonyoo           ###   ########seoul.kr  */
+/*   Created: 2024/03/17 09:57:31 by yonyoo            #+#    #+#             */
+/*   Updated: 2024/03/17 09:58:19 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	free_map(t_map *map)
+int	is_data(char *str)
 {
-	size_t	i;
-
-	i = 0;
-	while (map && map->map && i < map->max_height)
-	{
-		if ((map->map)[i])
-			free((map->map)[i]);
-		i++;
-	}
-	if (map && map->map)
-		free(map->map);
-	return (-1);
+	if (ft_strlen(str) < 3)
+		return (1);
+	if (str[0] == 'N' || str[0] == 'S' || str[0] == 'E' || str[0] == 'W'
+		|| str[0] == 'F' || str[0] == 'C')
+		return (1);
+	return (0);
 }

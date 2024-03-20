@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
 /*   Updated: 2024/03/17 21:33:39 by sangylee         ###   ########.fr       */
@@ -172,6 +172,12 @@ typedef struct s_screen{
 
 typedef struct s_map{
 	int		**map;
+	char	*floor_color;
+	char	*east_texture;
+	char	*west_texture;
+	char	*north_texture;
+	char	*south_texture;
+	char	init_direction;
 	size_t	max_height;
 	size_t	max_width;
 }	t_map;

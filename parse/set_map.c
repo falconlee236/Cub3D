@@ -6,13 +6,24 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/15 22:56:23 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/17 11:46:22 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static void	set_row(char *line, int	line_idx, t_map *map)
+static void	skip_lines(int fd, char **tmp_line)
+{
+	while (1)
+	{
+		*tmp_line = get_next_line(fd);
+		if (is_data(*tmp_line))
+			break ;
+		free(*tmp_line);
+	}
+}
+
+static void	set_row(char *line, int line_idx, t_map *map)
 {
 	size_t	i;
 	size_t	line_len;
@@ -40,7 +51,10 @@ int	set_map(char *filename, t_map *map)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	i = 0;
+	skip_lines(fd, &tmp_line);
+	set_row(tmp_line, 0, map);
+	free(tmp_line);
+	i = 1;
 	while (i < map->max_height)
 	{
 		tmp_line = get_next_line(fd);

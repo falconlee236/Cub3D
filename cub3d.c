@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
 /*   Updated: 2024/03/17 21:30:38 by sangylee         ###   ########.fr       */
@@ -69,8 +69,8 @@ int	main(int argc, char **argv)
 	atexit(leak_check);
 	argc = 0;
 	argv = NULL;
-	// if (!init_map(argc, argv, &map))
-	// 	return (free_map(&map));
+	if (!init_map(argc, argv, &map))
+		return (free_map(&map));
 	init_struct(&s);
 	mlx_loop_hook(s.mlx, &main_loop, &s);
 	mlx_hook(s.win, ON_DESTROY, 0, &destory_hook_event, &s);
