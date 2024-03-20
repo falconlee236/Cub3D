@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 21:30:38 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/20 22:25:35 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main_loop(t_screen *s)
 //LINK - Main.c
 int	main(int argc, char **argv)
 {
+	t_map		map;
 	t_screen	s;
 
 	atexit(leak_check);
