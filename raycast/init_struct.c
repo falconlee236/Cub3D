@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 21:30:09 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/22 02:34:02 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ static void	init_movekey(t_screen *s)
 	s->rotspeed = ROTSPEED;
 }
 
-void	init_struct(t_screen *s)
+void	init_struct(t_screen *s, t_map *map)
 {
 	int	x;
 
+	s->map = map;
 	s->re_buf = 0;
 	s->mouse_toggle = 0;
 	s->mlx = mlx_init();
