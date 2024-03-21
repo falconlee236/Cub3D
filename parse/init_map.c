@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/21 19:21:44 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/21 20:54:21 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	init_variable(t_map *map)
 	map->north_texture = NULL;
 	map->south_texture = NULL;
 	map->init_direction = -1;
-	map->max_height = -1;
-	map->max_width = -1;
+	map->max_height = 0;
+	map->max_width = 0;
 }
 
 void	init_map(int argc, char **argv, t_map *map)
