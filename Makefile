@@ -2,6 +2,7 @@ NAME=cub3D
 CFLAGS=cc -Wall -Wextra -Werror -g
 
 SRCS=cub3d.c \
+		utils.c \
 		$(wildcard parse/*.c) \
 		$(wildcard raycast/*.c) \
 		$(wildcard player/*.c) \
