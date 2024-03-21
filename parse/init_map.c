@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/21 17:33:13 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/21 19:21:44 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	check_filename(char *str)
 
 	filename_len = ft_strlen(str);
 	if (filename_len > 4 && ft_strncmp(str + filename_len - 4, ".cub", 4) != 0)
-		exit(-1);
+		exit_error("Not a Valid File.");
 }
 
 static void	init_variable(t_map *map)
@@ -39,8 +39,7 @@ void	init_map(int argc, char **argv, t_map *map)
 {
 	init_variable(map);
 	if (argc != 2 || !argv || !(argv[1]))
-		exit(-1);
-
+		exit_error("Invalid Argument.");
 	check_filename(argv[1]);
 	read_file_data(argv[1], map);
 	alloc_map(map);
