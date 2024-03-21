@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:38:47 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 16:40:35 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/22 02:39:58 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-extern int	g_worldmap[24][24];
 
 static void	fill_squres(t_img *m_map, int x, int y, int color)
 {
@@ -53,7 +51,7 @@ static void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
 static void	decide_color_and_drawing(
 	t_screen *s, t_img m_map, t_pos conv_cord, t_pos cord)
 {
-	if (g_worldmap[conv_cord.x][conv_cord.y])
+	if ((s->map->map)[conv_cord.x][conv_cord.y])
 		fill_squres(&m_map, (int)(MINI_SCALE * TILE_SIZE * cord.y),
 			(int)(MINI_SCALE * TILE_SIZE * cord.x), 0x000000);
 	else

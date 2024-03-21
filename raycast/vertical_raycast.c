@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_raycast.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 17:53:08 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/22 02:39:38 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-extern int	g_worldmap[24][24];
 
 static void	init_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 {
@@ -56,7 +54,7 @@ static void	doing_vertical_raycast(t_screen *s, t_vert_raycast_info *info)
 			info->sidedist.y += info->deltadist.y;
 			info->side = 1;
 		}
-		if (g_worldmap[info->map_pos.x][info->map_pos.y] > 0)
+		if ((s->map->map)[info->map_pos.x][info->map_pos.y] > 0)
 			info->hit = 1;
 	}
 	if (info->side == 0)
