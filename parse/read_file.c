@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 09:25:58 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/21 20:53:58 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/21 20:57:16 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	check_map_size(int fd, int data_cnt, t_map *map)
 		if (ft_strlen(tmp_line) == 0)
 		{
 			free(tmp_line);
+			if (map->max_height > 0)
+				exit_error("Invalid File Content.");
 			continue ;
 		}
 		set_map_width(tmp_line, map);
