@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/22 01:58:01 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/22 02:12:01 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ typedef struct s_screen{
 typedef struct s_map{
 	int		**map;
 	int		map_start_line;
+	int		map_start[2];
 	int		ceiling_color;
 	int		floor_color;
 	char	*east_texture;
