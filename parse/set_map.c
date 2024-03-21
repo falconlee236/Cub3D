@@ -6,11 +6,38 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/22 02:02:52 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/22 02:30:32 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+static void	set_row(int fd, char *line, int height, t_map *map)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (line[idx])
+	{
+		if (ft_isdigit(line[idx]))
+			map->map[height][idx] = line[idx] - '0';
+		else if (line[idx] == 'N'
+				|| line[idx] == 'S'
+				|| line[idx] == 'E'
+				|| line[idx] == 'W')
+				{
+					if (map->map_start[0] >= 0 && map->map_start[1] >= 0)
+					{
+						close(fd);
+						exit_error("Invalid Map Content.");
+					}
+					map->init_direction = line[idx];
+					map->map_start[0] = height;
+					map->map_start[1] = idx;
+				}
+		idx++;
+	}
+}
 
 static int	is_data(char *str)
 {
@@ -27,7 +54,7 @@ static int	is_data(char *str)
 	return (0);
 }
 
-static void	skip_lines(int fd, int *idx)
+static char	*skip_lines(int fd, int *idx)
 {
 	char	*tmp_line;
 
@@ -40,10 +67,7 @@ static void	skip_lines(int fd, int *idx)
 			exit_error("Failed to Read File.");
 		}
 		if (!is_data(tmp_line))
-		{
-			free(tmp_line);
-			break ;
-		}
+			return (tmp_line);
 		(*idx)++;
 		free(tmp_line);
 	}
@@ -59,16 +83,17 @@ void	set_map(char *filename, t_map *map)
 	if (fd < 0)
 		exit_error("Failed to Open File.");
 	idx = 0;
-	skip_lines(fd, (int*)&idx);
-	printf("AA %zu %d\n", idx, map->map_start_line);
+	tmp_line = skip_lines(fd, (int*)&idx);
 	if((int)idx != map->map_start_line)
 		exit_error("Failed to Read File.");
+	set_row(fd, tmp_line, 0, map);
+	idx = 1;
 	while (idx < map->max_height)
 	{
 		tmp_line = get_next_line_nonl(fd);
 		if (!tmp_line)
 			break ;
-		printf("AA #%s#\n", tmp_line);
+		set_row(fd, tmp_line, idx, map);
 		free(tmp_line);
 		idx++;
 	}
@@ -85,7 +110,7 @@ void	alloc_map(t_map *map)
 	i = 0;
 	while (i < map->max_height)
 	{
-		(map->map)[i] = (int *)malloc(map->max_height * sizeof(int));
+		(map->map)[i] = (int *)malloc(map->max_width * sizeof(int));
 		if (!(map->map)[i])
 			exit_error("Allocation Error.");
 		i++;
