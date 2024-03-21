@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/20 22:25:35 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/21 19:10:46 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ int	main(int argc, char **argv)
 	t_screen	s;
 
 	atexit(leak_check);
-	argc = 0;
-	argv = NULL;
-	if (!init_map(argc, argv, &map))
-		return (free_map(&map));
+	init_map(argc, argv, &map);
 	init_struct(&s);
 	mlx_loop_hook(s.mlx, &main_loop, &s);
 	mlx_hook(s.win, ON_DESTROY, 0, &destory_hook_event, &s);
