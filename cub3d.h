@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/22 02:12:01 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/22 02:34:32 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,26 +150,6 @@ typedef struct s_img{
 	unsigned int	*addr;
 }	t_img;
 
-typedef struct s_screen{
-	void	*mlx;
-	void	*win;
-	int		**buf;
-	int		**texture;
-	int		*sprite_texture;
-	int		**sub_texture;
-	double	*z_buffer;
-	double	movespeed;
-	double	rotspeed;
-	int		re_buf;
-	int		mouse_toggle;
-	t_move	move;
-	t_img	img;
-	t_vec	pos;
-	t_vec	dir;
-	t_vec	plane;
-}	t_screen;
-//!SECTION
-
 typedef struct s_map{
 	int		**map;
 	int		map_start_line;
@@ -184,6 +164,27 @@ typedef struct s_map{
 	size_t	max_height;
 	size_t	max_width;
 }	t_map;
+
+typedef struct s_screen{
+	void	*mlx;
+	void	*win;
+	int		**buf;
+	int		**texture;
+	int		*sprite_texture;
+	int		**sub_texture;
+	double	*z_buffer;
+	double	movespeed;
+	double	rotspeed;
+	int		re_buf;
+	int		mouse_toggle;
+	t_map	*map;
+	t_move	move;
+	t_img	img;
+	t_vec	pos;
+	t_vec	dir;
+	t_vec	plane;
+}	t_screen;
+//!SECTION
 
 //ANCHOR - Vector operation
 t_vec	vec_new(double x, double y);
@@ -201,7 +202,7 @@ int		key_release(int key, t_screen *s);
 int		mouse_hook_event(int x, int y, t_screen *s);
 
 //ANCHOR - Init struct
-void	init_struct(t_screen *s);
+void	init_struct(t_screen *s, t_map *map);
 
 //ANCHOR - main loop
 int		main_loop(t_screen *s);
