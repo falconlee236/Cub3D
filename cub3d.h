@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/17 21:33:39 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:35:19 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_sprite
 	double		x;
 	double		y;
 	int			texture;
-}	t_sprite;	
+}	t_sprite;
 
 typedef struct s_pair{
 	double	first;
@@ -172,7 +172,8 @@ typedef struct s_screen{
 
 typedef struct s_map{
 	int		**map;
-	char	*floor_color;
+	int		ceiling_color;
+	int		floor_color;
 	char	*east_texture;
 	char	*west_texture;
 	char	*north_texture;
@@ -229,4 +230,9 @@ void	render_minimap(t_screen *s);
 void	move_front_back(t_screen *s);
 void	move_left_right(t_screen *s);
 void	rot_left_right(t_screen *s);
+
+int		ft_strcmp(const char *s1, const char *s2);
+void	exit_error(char *str);
+void	free_str_arr(char **arr, char *str);
+
 #endif
