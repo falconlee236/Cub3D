@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 09:25:58 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/21 19:27:10 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/21 20:53:58 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	check_valid_data(int fd, int data_cnt, t_map *map)
 {
 	if (data_cnt != 6)
 		exit_error("Invalid File Content.");
-	if (close(fd) < 0)
-		exit_error("Failed to Open File.");
 	fd = open(map->east_texture, O_RDONLY);
 	if (fd < 0 || close(fd) < 0)
 		exit_error("Failed to Open File.");
@@ -33,6 +31,38 @@ static void	check_valid_data(int fd, int data_cnt, t_map *map)
 	if (map->ceiling_color < 0
 		|| map->floor_color < 0)
 		exit_error("Invalid File Content.");
+}
+
+static void	set_map_width(char *line, t_map *map)
+{
+	size_t	len;
+
+	len = ft_strlen(line);
+	if (map->max_width < len)
+		map->max_width = len;
+}
+
+static void	check_map_size(int fd, int data_cnt, t_map *map)
+{
+	char	*tmp_line;
+
+	while (1)
+	{
+		tmp_line = get_next_line_nonl(fd);
+		if (!tmp_line)
+			break ;
+		if (ft_strlen(tmp_line) == 0)
+		{
+			free(tmp_line);
+			continue ;
+		}
+		set_map_width(tmp_line, map);
+		(map->max_height)++;
+		free(tmp_line);
+	}
+	if (close(fd) < 0)
+		exit_error("Failed to Open File.");
+	check_valid_data(fd, data_cnt, map);
 }
 
 static void	set_data(char **arr_line, int *data_cnt, t_map *map)
@@ -75,7 +105,7 @@ void	read_file_data(char *filename, t_map *map)
 		tmp_line = get_next_line_nonl(fd);
 		if (!tmp_line)
 			break ;
-		if (ft_strcmp(tmp_line, "\0") == 0)
+		if (ft_strlen(tmp_line) == 0)
 		{
 			free(tmp_line);
 			continue ;
@@ -84,5 +114,5 @@ void	read_file_data(char *filename, t_map *map)
 		set_data(arr_line, &data_cnt, map);
 		free_str_arr(arr_line, tmp_line);
 	}
-	check_valid_data(fd, data_cnt, map);
+	check_map_size(fd, data_cnt, map);
 }
