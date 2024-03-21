@@ -6,13 +6,13 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/21 17:37:37 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/21 21:04:06 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	set_map(char *filename, t_map *map)
+void	set_map(char *filename, t_map *map)
 {
 	char	*tmp_line;
 	int		fd;
@@ -20,7 +20,7 @@ int	set_map(char *filename, t_map *map)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		exit_error("Failed to Open File.");
 	i = 1;
 	while (i < map->max_height)
 	{
@@ -31,25 +31,21 @@ int	set_map(char *filename, t_map *map)
 		i++;
 	}
 	close(fd);
-	if (i != map->max_height)
-		return (0);
-	return (1);
 }
 
-int	alloc_map(t_map *map)
+void	alloc_map(t_map *map)
 {
 	size_t	i;
 
 	map->map = (int **)malloc(map->max_height * sizeof(int *));
 	if (!(map->map))
-		return (0);
+		exit_error("Allocation Error.");
 	i = 0;
 	while (i < map->max_height)
 	{
 		(map->map)[i] = (int *)malloc(map->max_height * sizeof(int));
 		if (!(map->map)[i])
-			return (0);
+			exit_error("Allocation Error.");
 		i++;
 	}
-	return (1);
 }
