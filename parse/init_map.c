@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 04:59:05 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:08:12 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	init_variable(t_map *map)
 	map->map_start_line = 0;
 	map->map_start[0] = -1;
 	map->map_start[1] = -1;
+	map->sprite_pos[0] = -1;
+	map->sprite_pos[1] = -1;
 	map->floor_color = -1;
 	map->ceiling_color = -1;
 	map->east_texture = NULL;
