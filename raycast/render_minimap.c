@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:38:47 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/22 02:39:58 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/23 22:50:11 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ static void	cord_convert(t_screen *s, int x, int y, t_pos *conv_cord)
 {
 	if ((int)s->pos.x - MAP_NUM_ROWS / 2 + x < 0)
 		conv_cord->x = 0;
-	else if ((int)s->pos.x - MAP_NUM_ROWS / 2 + x >= 24)
-		conv_cord->x = 23;
+	else if (
+		(int)s->pos.x - MAP_NUM_ROWS / 2 + x >= (int)s->map->max_height)
+		conv_cord->x = (int)s->map->max_height - 1;
 	else
 		conv_cord->x = (int)s->pos.x - MAP_NUM_ROWS / 2 + x;
 	if ((int)s->pos.y - MAP_NUM_COLS / 2 + y < 0)
 		conv_cord->y = 0;
-	else if ((int)s->pos.y - MAP_NUM_COLS / 2 + y >= 24)
-		conv_cord->y = 23;
+	else if (
+		(int)s->pos.y - MAP_NUM_COLS / 2 + y >= (int)s->map->max_width)
+		conv_cord->y = (int)s->map->max_width - 1;
 	else
 		conv_cord->y = (int)s->pos.y - MAP_NUM_COLS / 2 + y;
 }
