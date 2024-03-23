@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/24 04:01:10 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 04:06:44 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static void	load_texture(t_screen *s)
 	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
 	load_image(s, s->texture[8], "textures/barrel.xpm", &img);
 	load_image(s, s->texture[9], "textures/pillar.xpm", &img);
-	load_image(s, s->sub_texture[0], "textures/colorstone.xpm", &img);
-	load_image(s, s->sub_texture[1], "textures/barrel.xpm", &img);
-	load_image(s, s->sub_texture[2], "textures/pillar.xpm", &img);
-	load_image(s, s->sub_texture[3], "textures/greenlight.xpm", &img);
+	load_image(s, s->sub_texture[0], "textures/sans_1.xpm", &img);
+	load_image(s, s->sub_texture[1], "textures/sans_2.xpm", &img);
+	load_image(s, s->sub_texture[2], "textures/sans_3.xpm", &img);
+	load_image(s, s->sub_texture[3], "textures/sans_4.xpm", &img);
 }
 
 static void	init_direction(t_screen *s)
