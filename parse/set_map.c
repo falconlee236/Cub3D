@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 02:12:12 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 04:22:13 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	set_row(int fd, char *line, int height, t_map *map)
 	idx = 0;
 	while (line && line[idx])
 	{
-		if (ft_isdigit(line[idx]))
+		if (ft_isdigit(line[idx]) || line[idx] == ' ')
 			map->map[height][idx] = line[idx] - '0';
 		else if (line[idx] == 'N'
 			|| line[idx] == 'S'
@@ -34,6 +34,11 @@ static void	set_row(int fd, char *line, int height, t_map *map)
 			map->init_direction = line[idx];
 			map->map_start[0] = height;
 			map->map_start[1] = idx;
+		}
+		else
+		{
+			close(fd);
+			exit_error("Invalid Map Content.");
 		}
 		idx++;
 	}
