@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 02:22:07 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 04:35:31 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	check_filename(char *str)
 static void	init_variable(t_map *map)
 {
 	map->map = NULL;
+	map->map_is_visit = NULL;
 	map->map_start_line = 0;
 	map->map_start[0] = -1;
 	map->map_start[1] = -1;
