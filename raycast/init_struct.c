@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/17 21:30:09 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:16:14 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,18 @@ static void	init_movekey(t_screen *s)
 	s->move.key_d = 0;
 	s->move.key_arr_l = 0;
 	s->move.key_arr_r = 0;
-	s->pos = vec_new(22, 11.5);
+	s->pos = vec_new(s->map->map_start[0], s->map->map_start[1]);
 	s->dir = vec_new(-1, 0);
 	s->plane = vec_new(0, 0.66);
 	s->movespeed = MOVESPEED;
 	s->rotspeed = ROTSPEED;
 }
 
-void	init_struct(t_screen *s)
+void	init_struct(t_screen *s, t_map *map)
 {
 	int	x;
 
+	s->map = map;
 	s->re_buf = 0;
 	s->mouse_toggle = 0;
 	s->mlx = mlx_init();

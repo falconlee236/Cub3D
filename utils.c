@@ -5,19 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 09:57:31 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/17 09:58:19 by yonyoo           ###   ########seoul.kr  */
+/*   Created: 2024/03/21 17:15:22 by yonyoo            #+#    #+#             */
+/*   Updated: 2024/03/21 19:35:15 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
-int	is_data(char *str)
+void	exit_error(char *str)
 {
-	if (ft_strlen(str) < 3)
-		return (1);
-	if (str[0] == 'N' || str[0] == 'S' || str[0] == 'E' || str[0] == 'W'
-		|| str[0] == 'F' || str[0] == 'C')
-		return (1);
-	return (0);
+	ft_putstr_fd("Error\n", 2);
+	ft_putendl_fd(str, 2);
+	exit(-1);
+}
+
+void	free_str_arr(char **arr, char *str)
+{
+	int	idx;
+
+	idx = 0;
+	while (arr && arr[idx])
+	{
+		free(arr[idx]);
+		idx++;
+	}
+	if (arr)
+		free(arr);
+	if (str)
+		free(str);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

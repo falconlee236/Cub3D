@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_data.c                                        :+:      :+:    :+:   */
+/*   get_next_line_nonl.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 09:39:41 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/17 11:47:43 by yonyoo           ###   ########seoul.kr  */
+/*   Created: 2024/03/21 19:17:47 by yonyoo            #+#    #+#             */
+/*   Updated: 2024/03/21 19:19:33 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static int	valid_data(char *str)
+char	*remove_nl(char *line)
 {
-	(void)str;
-	// Check if Data Lines or Empty Lines
-	// If Not, return 0
-	return (1);
+	char	*str;
+	size_t	len;
+
+	len = ft_strlen(line);
+	if (line[len - 1] != '\n')
+		return (line);
+	str = (char *)malloc(sizeof(char) * len);
+	if (!str)
+		exit(EXIT_FAILURE);
+	ft_strlcpy(str, line, len);
+	free(line);
+	return (str);
 }
 
-int	read_data(char *str, int *data_cnt, int *is_ok, t_map *map)
+char	*get_next_line_nonl(int fd)
 {
-	(void)data_cnt;
-	(void)is_ok;
-	(void)map;
-	if (!is_data(str))
-		return (0);
-	if (!valid_data(str))
-		return (0);
-	// Set DAta Value / data_cnt ++
-	// Check if All Data Loaded
-	return (1);
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (NULL);
+	return (remove_nl(line));
 }
