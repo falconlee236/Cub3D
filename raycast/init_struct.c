@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/23 20:16:14 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/23 21:08:42 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,30 @@ static void	load_texture(t_screen *s)
 	load_image(s, s->sub_texture[3], "textures/greenlight.xpm", &img);
 }
 
+static void	init_direction(t_screen *s)
+{
+	if (s->map->init_direction == 'N')
+	{
+		s->dir = vec_new(-1, 0);
+		s->plane = vec_new(0, 1);
+	}
+	else if (s->map->init_direction == 'S')
+	{
+		s->dir = vec_new(1, 0);
+		s->plane = vec_new(0, -1);
+	}
+	else if (s->map->init_direction == 'E')
+	{
+		s->dir = vec_new(0, 1);
+		s->plane = vec_new(1, 0);
+	}
+	else
+	{
+		s->dir = vec_new(0, -1);
+		s->plane = vec_new(-1, 0);
+	}
+}
+
 static void	init_movekey(t_screen *s)
 {
 	s->move.key_a = 0;
@@ -64,10 +88,9 @@ static void	init_movekey(t_screen *s)
 	s->move.key_arr_l = 0;
 	s->move.key_arr_r = 0;
 	s->pos = vec_new(s->map->map_start[0], s->map->map_start[1]);
-	s->dir = vec_new(-1, 0);
-	s->plane = vec_new(0, 0.66);
 	s->movespeed = MOVESPEED;
 	s->rotspeed = ROTSPEED;
+	init_direction(s);
 }
 
 void	init_struct(t_screen *s, t_map *map)
