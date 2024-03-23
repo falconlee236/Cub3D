@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 04:35:18 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:08:29 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_map{
 	int		**map_is_visit;
 	int		map_start_line;
 	int		map_start[2];
+	int		sprite_pos[2];
 	int		ceiling_color;
 	int		floor_color;
 	char	*east_texture;
