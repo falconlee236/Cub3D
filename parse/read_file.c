@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 09:25:58 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/22 02:06:56 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 02:18:04 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ static void	check_map_size(int fd, int data_cnt, t_map *map)
 
 static void	set_data(char **arr_line, int *data_cnt, t_map *map)
 {
-	if (ft_strcmp(arr_line[0], "EA") == 0 && !(map->east_texture)
+	if (!arr_line[0])
+		exit_error("Invalid File Content.");
+	else if (ft_strcmp(arr_line[0], "EA") == 0 && !(map->east_texture)
 		&& ++(*data_cnt))
 		map->east_texture = ft_strdup(arr_line[1]);
 	else if (ft_strcmp(arr_line[0], "WE") == 0 && !(map->west_texture)
