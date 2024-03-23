@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/23 20:46:10 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/23 21:10:13 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ static void	set_row(int fd, char *line, int height, t_map *map)
 		if (ft_isdigit(line[idx]))
 			map->map[height][idx] = line[idx] - '0';
 		else if (line[idx] == 'N'
-				|| line[idx] == 'S'
-				|| line[idx] == 'E'
-				|| line[idx] == 'W')
-				{
-					if (map->map_start[0] >= 0 && map->map_start[1] >= 0)
-					{
-						close(fd);
-						exit_error("Invalid Map Content.");
-					}
-					map->init_direction = line[idx];
-					map->map_start[0] = height;
-					map->map_start[1] = idx;
-				}
+			|| line[idx] == 'S'
+			|| line[idx] == 'E'
+			|| line[idx] == 'W')
+		{
+			if (map->map_start[0] >= 0 && map->map_start[1] >= 0)
+			{
+				close(fd);
+				exit_error("Invalid Map Content.");
+			}
+			map->init_direction = line[idx];
+			map->map_start[0] = height;
+			map->map_start[1] = idx;
+		}
 		idx++;
 	}
 }
@@ -83,8 +83,8 @@ void	set_map(char *filename, t_map *map)
 	if (fd < 0)
 		exit_error("Failed to Open File.");
 	idx = 0;
-	tmp_line = skip_lines(fd, (int*)&idx);
-	if((int)idx != map->map_start_line)
+	tmp_line = skip_lines(fd, (int *)&idx);
+	if ((int)idx != map->map_start_line)
 		exit_error("Failed to Read File.");
 	set_row(fd, tmp_line, 0, map);
 	idx = 1;
