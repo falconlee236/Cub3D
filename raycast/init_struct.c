@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/24 04:06:44 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 04:14:39 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ static void	init_movekey(t_screen *s)
 	s->move.key_d = 0;
 	s->move.key_arr_l = 0;
 	s->move.key_arr_r = 0;
-	s->pos = vec_new(s->map->map_start[0], s->map->map_start[1]);
+	s->pos = vec_new(
+			s->map->map_start[0] + 0.1,
+			s->map->map_start[1] + 0.1);
 	s->movespeed = MOVESPEED;
 	s->rotspeed = ROTSPEED;
 	init_direction(s);
