@@ -3,8 +3,8 @@ SO ./textures/grass.xpm
 WE ./textures/iron.xpm
 EA ./textures/stone.xpm
 
-F 220,100,0
-C 225,30,0
+F 0,255,0
+C 0,255,255
 
         1111111111111111111111111
         1000000000110000000000001
