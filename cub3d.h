@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 05:08:29 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:18:20 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,13 +158,13 @@ typedef struct s_map{
 	int		sprite_pos[2];
 	int		ceiling_color;
 	int		floor_color;
+	int		max_height;
+	int		max_width;
 	char	*east_texture;
 	char	*west_texture;
 	char	*north_texture;
 	char	*south_texture;
 	char	init_direction;
-	size_t	max_height;
-	size_t	max_width;
 }	t_map;
 
 typedef struct s_screen{
