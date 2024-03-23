@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 05:08:12 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:09:15 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	init_map(int argc, char **argv, t_map *map)
 	init_map_value(map);
 	set_map(argv[1], map);
 	verify_map(map);
+	init_sprite(map);
 }

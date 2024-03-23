@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:13:23 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 04:59:15 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:09:45 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	alloc_map(t_map *map);
 void	close_fd_exit(int fd);
 void	init_map(int argc, char **argv, t_map *map);
 void	init_map_value(t_map *map);
+void	init_sprite(t_map *map);
 void	read_file_data(char *filename, t_map *map);
 void	set_map(char *filename, t_map *map);
 void	verify_map(t_map *map);
