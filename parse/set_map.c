@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 04:22:13 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 04:52:40 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,45 @@ void	set_map(char *filename, t_map *map)
 	close(fd);
 }
 
+static void	init_map_value(t_map *map)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < map->max_height)
+	{
+		map->map[i][0] = 1;
+		map->map[i][map->max_width - 1] = 1;
+		if (i == 0 || i == map->max_height - 1)
+		{
+			j = 0;
+			while (j < map->max_width)
+			{
+				map->map[i][j] = 1;
+				j++;
+			}
+		}
+		i++;
+	}
+}
+
 void	alloc_map(t_map *map)
 {
 	size_t	i;
 
 	map->map = (int **)ft_calloc(map->max_height, sizeof(int *));
-	if (!(map->map))
+	map->map_is_visit = (int **)ft_calloc(map->max_height, sizeof(int *));
+	if (!(map->map) || !(map->map))
 		exit_error("Allocation Error.");
 	i = 0;
 	while (i < map->max_height)
 	{
 		(map->map)[i] = (int *)ft_calloc(map->max_width, sizeof(int));
-		if (!(map->map)[i])
+		(map->map_is_visit)[i] = (int *)ft_calloc(map->max_width, sizeof(int));
+		if (!(map->map)[i] || !(map->map_is_visit)[i])
 			exit_error("Allocation Error.");
 		i++;
 	}
+	init_map_value(map);
 }
