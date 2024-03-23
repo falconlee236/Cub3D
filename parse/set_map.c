@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 04:52:40 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 04:59:09 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,57 +27,17 @@ static void	set_row(int fd, char *line, int height, t_map *map)
 			|| line[idx] == 'W')
 		{
 			if (map->map_start[0] >= 0 && map->map_start[1] >= 0)
-			{
-				close(fd);
-				exit_error("Invalid Map Content.");
-			}
+				close_fd_exit(fd);
 			map->init_direction = line[idx];
 			map->map_start[0] = height;
 			map->map_start[1] = idx;
 		}
 		else
-		{
-			close(fd);
-			exit_error("Invalid Map Content.");
-		}
+			close_fd_exit(fd);
 		idx++;
 	}
 	if (line)
 		free(line);
-}
-
-static int	is_data(char *str)
-{
-	if (!str)
-		return (0);
-	if (ft_strncmp(str, "EA", 2) == 0
-		|| ft_strncmp(str, "WE", 2) == 0
-		|| ft_strncmp(str, "NO", 2) == 0
-		|| ft_strncmp(str, "SO", 2) == 0
-		|| ft_strncmp(str, "F ", 2) == 0
-		|| ft_strncmp(str, "C ", 2) == 0
-		|| ft_strlen(str) == 0)
-		return (1);
-	return (0);
-}
-
-static char	*skip_lines(int fd, int *idx)
-{
-	char	*tmp_line;
-
-	while (1)
-	{
-		tmp_line = get_next_line_nonl(fd);
-		if (!tmp_line)
-		{
-			close(fd);
-			exit_error("Failed to Read File.");
-		}
-		if (!is_data(tmp_line))
-			return (tmp_line);
-		(*idx)++;
-		free(tmp_line);
-	}
 }
 
 void	set_map(char *filename, t_map *map)
@@ -106,7 +66,7 @@ void	set_map(char *filename, t_map *map)
 	close(fd);
 }
 
-static void	init_map_value(t_map *map)
+void	init_map_value(t_map *map)
 {
 	size_t	i;
 	size_t	j;
@@ -146,5 +106,4 @@ void	alloc_map(t_map *map)
 			exit_error("Allocation Error.");
 		i++;
 	}
-	init_map_value(map);
 }
