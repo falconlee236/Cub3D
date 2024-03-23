@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_raycast.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:31:21 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/11 22:34:57 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/24 05:01:34 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	doing_horizontal_raycast(t_screen *s, t_hori_raycast_info *info,
 	tex_cord.y = (int)(TEX_H * (info->floor_cord.y - cell_cord.y))
 		& (TEX_H - 1);
 	info->floor_cord = vec_add(info->floor_cord, info->floor_step);
-	s->buf[y][x] = (create_trgb(0, 0, 255, 0) >> 1) & 8355711;
-	s->buf[SCREEN_H - y - 1][x] = (create_trgb(0, 0, 255, 255) >> 1) & 8355711;
+	s->buf[y][x] = (s->map->floor_color >> 1) & 8355711;
+	s->buf[SCREEN_H - y - 1][x] = (s->map->ceiling_color >> 1) & 8355711;
 }
 
 void	horizontal_raycast(t_screen *s)

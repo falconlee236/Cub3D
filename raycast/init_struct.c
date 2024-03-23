@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/23 22:52:11 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/24 04:14:39 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ static void	load_texture(t_screen *s)
 	t_img	img;
 
 	load_image(s, s->texture[0], "textures/eagle.xpm", &img);
-	load_image(s, s->texture[1], "textures/redbrick.xpm", &img);
-	load_image(s, s->texture[2], "textures/purplestone.xpm", &img);
-	load_image(s, s->texture[3], "textures/greystone.xpm", &img);
-	load_image(s, s->texture[4], "textures/bluestone.xpm", &img);
+	load_image(s, s->texture[1], s->map->south_texture, &img);
+	load_image(s, s->texture[2], s->map->north_texture, &img);
+	load_image(s, s->texture[3], s->map->east_texture, &img);
+	load_image(s, s->texture[4], s->map->west_texture, &img);
 	load_image(s, s->texture[5], "textures/mossy.xpm", &img);
 	load_image(s, s->texture[6], "textures/wood.xpm", &img);
 	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
 	load_image(s, s->texture[8], "textures/barrel.xpm", &img);
 	load_image(s, s->texture[9], "textures/pillar.xpm", &img);
-	load_image(s, s->sub_texture[0], "textures/colorstone.xpm", &img);
-	load_image(s, s->sub_texture[1], "textures/barrel.xpm", &img);
-	load_image(s, s->sub_texture[2], "textures/pillar.xpm", &img);
-	load_image(s, s->sub_texture[3], "textures/greenlight.xpm", &img);
+	load_image(s, s->sub_texture[0], "textures/sans_1.xpm", &img);
+	load_image(s, s->sub_texture[1], "textures/sans_2.xpm", &img);
+	load_image(s, s->sub_texture[2], "textures/sans_3.xpm", &img);
+	load_image(s, s->sub_texture[3], "textures/sans_4.xpm", &img);
 }
 
 static void	init_direction(t_screen *s)

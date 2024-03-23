@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/22 02:21:20 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:09:15 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ static void	check_filename(char *str)
 static void	init_variable(t_map *map)
 {
 	map->map = NULL;
+	map->map_is_visit = NULL;
 	map->map_start_line = 0;
 	map->map_start[0] = -1;
 	map->map_start[1] = -1;
+	map->sprite_pos[0] = -1;
+	map->sprite_pos[1] = -1;
 	map->floor_color = -1;
 	map->ceiling_color = -1;
 	map->east_texture = NULL;
@@ -46,5 +49,8 @@ void	init_map(int argc, char **argv, t_map *map)
 	check_filename(argv[1]);
 	read_file_data(argv[1], map);
 	alloc_map(map);
+	init_map_value(map);
 	set_map(argv[1], map);
+	verify_map(map);
+	init_sprite(map);
 }
