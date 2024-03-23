@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/23 21:08:42 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/23 22:52:11 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ static void	init_movekey(t_screen *s)
 	s->move.key_d = 0;
 	s->move.key_arr_l = 0;
 	s->move.key_arr_r = 0;
-	s->pos = vec_new(s->map->map_start[0], s->map->map_start[1]);
+	s->pos = vec_new(
+			s->map->map_start[0] + 0.1,
+			s->map->map_start[1] + 0.1);
 	s->movespeed = MOVESPEED;
 	s->rotspeed = ROTSPEED;
 	init_direction(s);
