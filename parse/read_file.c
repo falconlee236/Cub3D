@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 09:25:58 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 02:18:04 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:19:34 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	check_valid_data(int fd, int data_cnt, t_map *map)
 
 static void	set_map_width(char *line, t_map *map)
 {
-	size_t	len;
+	int	len;
 
-	len = ft_strlen(line);
+	len = (int)ft_strlen(line);
 	if (map->max_width < len)
 		map->max_width = len;
 }
