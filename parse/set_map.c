@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 04:59:09 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 05:20:47 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	set_map(char *filename, t_map *map)
 {
 	char	*tmp_line;
 	int		fd;
-	size_t	idx;
+	int		idx;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		exit_error("Failed to Open File.");
 	idx = 0;
 	tmp_line = skip_lines(fd, (int *)&idx);
-	if ((int)idx != map->map_start_line)
+	if (idx != map->map_start_line)
 		exit_error("Failed to Read File.");
 	set_row(fd, tmp_line, 0, map);
 	idx = 1;
@@ -68,8 +68,8 @@ void	set_map(char *filename, t_map *map)
 
 void	init_map_value(t_map *map)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < map->max_height)
@@ -91,7 +91,7 @@ void	init_map_value(t_map *map)
 
 void	alloc_map(t_map *map)
 {
-	size_t	i;
+	int	i;
 
 	map->map = (int **)ft_calloc(map->max_height, sizeof(int *));
 	map->map_is_visit = (int **)ft_calloc(map->max_height, sizeof(int *));
