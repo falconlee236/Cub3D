@@ -1,7 +1,7 @@
-NO ./textures/barrel.xpm
-SO ./textures/barrel.xpm
-WE ./textures/barrel.xpm
-EA ./textures/barrel.xpm
+NO ./textures/brick.xpm
+SO ./textures/grass.xpm
+WE ./textures/iron.xpm
+EA ./textures/stone.xpm
 
 F 220,100,0
 C 225,30,0
