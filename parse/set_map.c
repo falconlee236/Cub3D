@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/23 21:10:13 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 02:12:12 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	set_row(int fd, char *line, int height, t_map *map)
 	size_t	idx;
 
 	idx = 0;
-	while (line[idx])
+	while (line && line[idx])
 	{
 		if (ft_isdigit(line[idx]))
 			map->map[height][idx] = line[idx] - '0';
@@ -37,6 +37,8 @@ static void	set_row(int fd, char *line, int height, t_map *map)
 		}
 		idx++;
 	}
+	if (line)
+		free(line);
 }
 
 static int	is_data(char *str)
@@ -94,7 +96,6 @@ void	set_map(char *filename, t_map *map)
 		if (!tmp_line)
 			break ;
 		set_row(fd, tmp_line, idx, map);
-		free(tmp_line);
 		idx++;
 	}
 	close(fd);
