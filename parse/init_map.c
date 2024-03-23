@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:10:42 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/22 02:21:20 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 02:22:07 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	init_map(int argc, char **argv, t_map *map)
 	read_file_data(argv[1], map);
 	alloc_map(map);
 	set_map(argv[1], map);
+	verify_map(map);
 }
