@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/23 21:08:42 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 04:01:10 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static void	load_texture(t_screen *s)
 	t_img	img;
 
 	load_image(s, s->texture[0], "textures/eagle.xpm", &img);
-	load_image(s, s->texture[1], "textures/redbrick.xpm", &img);
-	load_image(s, s->texture[2], "textures/purplestone.xpm", &img);
-	load_image(s, s->texture[3], "textures/greystone.xpm", &img);
-	load_image(s, s->texture[4], "textures/bluestone.xpm", &img);
+	load_image(s, s->texture[1], s->map->south_texture, &img);
+	load_image(s, s->texture[2], s->map->north_texture, &img);
+	load_image(s, s->texture[3], s->map->east_texture, &img);
+	load_image(s, s->texture[4], s->map->west_texture, &img);
 	load_image(s, s->texture[5], "textures/mossy.xpm", &img);
 	load_image(s, s->texture[6], "textures/wood.xpm", &img);
 	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
