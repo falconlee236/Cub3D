@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 05:09:22 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 05:18:32 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 15:01:44 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,25 @@ static int	is_valid(int x, int y, t_map *map)
 	return (1);
 }
 
+static void	add_sprite(int x, int y, t_map *map)
+{
+	map->sprite_pos[map->sprite_cnt].x = x;
+	map->sprite_pos[map->sprite_cnt].y = y;
+	(map->sprite_cnt)++;
+}
+
 void	init_sprite(t_map *map)
 {
 	if (map->map_start[0] >= 1 && map->map_start[0] < map->max_height - 1
 		&& map->map_start[1] >= 1 && map->map_start[1] < map->max_width - 1)
 	{
 		if (is_valid(map->map_start[0], map->map_start[1] - 1, map))
-		{
-			map->sprite_pos[0] = map->map_start[0];
-			map->sprite_pos[1] = map->map_start[1] - 1;
-		}
-		else if (is_valid(map->map_start[0], map->map_start[1] + 1, map))
-		{
-			map->sprite_pos[0] = map->map_start[0];
-			map->sprite_pos[1] = map->map_start[1] + 1;
-		}
-		else if (is_valid(map->map_start[0] - 1, map->map_start[1], map))
-		{
-			map->sprite_pos[0] = map->map_start[0] - 1;
-			map->sprite_pos[1] = map->map_start[1];
-		}
-		else if (is_valid(map->map_start[0] + 1, map->map_start[1], map))
-		{
-			map->sprite_pos[0] = map->map_start[0] + 1;
-			map->sprite_pos[1] = map->map_start[1];
-		}
+			add_sprite(map->map_start[0], map->map_start[1] - 1, map);
+		if (is_valid(map->map_start[0], map->map_start[1] + 1, map))
+			add_sprite(map->map_start[0], map->map_start[1] + 1, map);
+		if (is_valid(map->map_start[0] - 1, map->map_start[1], map))
+			add_sprite(map->map_start[0] - 1, map->map_start[1], map);
+		 if (is_valid(map->map_start[0] + 1, map->map_start[1], map))
+			add_sprite(map->map_start[0] + 1, map->map_start[1], map);
 	}
 }
