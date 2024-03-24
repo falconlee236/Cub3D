@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 13:06:20 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:59:15 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,20 +151,21 @@ typedef struct s_img{
 }	t_img;
 
 typedef struct s_map{
-	int		**map;
-	int		**map_is_visit;
-	int		map_start_line;
-	int		map_start[2];
-	int		sprite_pos[2];
-	int		ceiling_color;
-	int		floor_color;
-	int		max_height;
-	int		max_width;
-	char	*east_texture;
-	char	*west_texture;
-	char	*north_texture;
-	char	*south_texture;
-	char	init_direction;
+	int			**map;
+	int			**map_is_visit;
+	int			map_start_line;
+	int			map_start[2];
+	int			ceiling_color;
+	int			floor_color;
+	int			max_height;
+	int			max_width;
+	int			sprite_cnt;
+	char		*east_texture;
+	char		*west_texture;
+	char		*north_texture;
+	char		*south_texture;
+	char		init_direction;
+	t_sprite	sprite_pos[4];
 }	t_map;
 
 typedef struct s_screen{
