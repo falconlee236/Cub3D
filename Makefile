@@ -10,7 +10,7 @@ SRCS=cub3d.c \
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(SRCS)
 	@$(MAKE) -C mlx all
 	@$(MAKE) -C libft all
 	$(CFLAGS) -o $(NAME) $(SRCS) -L ./mlx -lmlx -framework OpenGL -framework Appkit -L ./libft -lft
