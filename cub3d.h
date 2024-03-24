@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 14:59:15 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 15:17:16 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_pos{
 //!SECTION
 
 //SECTION - Sprite Sturct
-# define SPRITE_NUM 19
 
 typedef struct s_sprite
 {
@@ -224,8 +223,8 @@ void	vertical_raycast(t_screen *s);
 
 //ANCHOR - sprite raycast function
 void	sprite_raycast(t_screen *s);
-void	sort_order(t_pair *orders);
-void	sort_sprites(t_sprite_raycast_info *info);
+void	sort_order(t_screen *s, t_pair *orders);
+void	sort_sprites(t_screen *s, t_sprite_raycast_info *info);
 int		set_sprite_raycast(t_screen *s, t_sprite_raycast_info *info);
 void	det_sprite_raycast(t_screen *s, t_sprite_raycast_info *info, int i);
 

@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_raycast.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:18 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 13:07:40 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/24 15:16:50 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-t_sprite	g_sprite[SPRITE_NUM] =
-{		
-	{20.5, 11.5}, //green light in front of playerstart
-	//green lights in every room
-	{18.5,4.5},
-	{10.0,4.5},
-	{10.0,12.5},
-	{3.5, 6.5},
-	{3.5, 20.5},
-	{3.5, 14.5},
-	{14.5,20.5},
-
-	//row of pillars in front of wall: fisheye test
-	{18.5, 10.5},
-	{18.5, 11.5},
-	{18.5, 12.5},
-
-	//some barrels around the map
-	{21.5, 1.5},
-	{15.5, 1.5},
-	{16.0, 1.8},
-	{16.2, 1.2},
-	{3.5,  2.5},
-	{9.5, 15.5},
-	{10.0, 15.1},
-	{10.5, 15.8},
-};
 
 static void	cal_sprite_raycast(t_sprite_raycast_info *info)
 {
@@ -107,7 +79,7 @@ void	sprite_raycast(t_screen *s)
 
 	set_sprite_raycast(s, &info);
 	i = 0;
-	while (i < SPRITE_NUM)
+	while (i < s->map->sprite_cnt)
 	{
 		det_sprite_raycast(s, &info, i);
 		cal_sprite_raycast(&info);
