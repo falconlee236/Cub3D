@@ -6,7 +6,7 @@
 /*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 12:59:22 by sangylee         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:06:20 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
-	int			texture;
 }	t_sprite;
 
 typedef struct s_pair{
