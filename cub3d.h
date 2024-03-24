@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 05:18:20 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 12:59:22 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 //SECTION - PIXEL SIZE CONST
 # define TEX_W 64
 # define TEX_H 64
+# define TEX_NUM 4
 # define SCREEN_W 1280
 # define SCREEN_H 760
 //!SECTION

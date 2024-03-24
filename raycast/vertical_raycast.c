@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_raycast.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:28:14 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/22 02:39:38 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 13:00:06 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,13 @@ static void	drawing_vertical_raycast(
 
 	y = info->draw_start;
 	if (info->raydir.x >= 0 && info->side == 0)
-		textnum = 1;
+		textnum = 0;
 	else if (info->raydir.x < 0 && info->side == 0)
-		textnum = 2;
+		textnum = 1;
 	else if (info->raydir.y >= 0 && info->side == 1)
-		textnum = 3;
+		textnum = 2;
 	else if (info->raydir.y < 0 && info->side == 1)
-		textnum = 4;
+		textnum = 3;
 	while (y < info->draw_end)
 	{
 		text_y = (int)(info->text_pos) & (TEX_H - 1);

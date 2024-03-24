@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sangylee <sangylee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:04:50 by isang-yun         #+#    #+#             */
-/*   Updated: 2024/03/24 04:14:39 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 13:00:31 by sangylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,10 @@ static void	load_texture(t_screen *s)
 {
 	t_img	img;
 
-	load_image(s, s->texture[0], "textures/eagle.xpm", &img);
-	load_image(s, s->texture[1], s->map->south_texture, &img);
+	load_image(s, s->texture[0], s->map->west_texture, &img);
+	load_image(s, s->texture[1], s->map->east_texture, &img);
 	load_image(s, s->texture[2], s->map->north_texture, &img);
-	load_image(s, s->texture[3], s->map->east_texture, &img);
-	load_image(s, s->texture[4], s->map->west_texture, &img);
-	load_image(s, s->texture[5], "textures/mossy.xpm", &img);
-	load_image(s, s->texture[6], "textures/wood.xpm", &img);
-	load_image(s, s->texture[7], "textures/colorstone.xpm", &img);
-	load_image(s, s->texture[8], "textures/barrel.xpm", &img);
-	load_image(s, s->texture[9], "textures/pillar.xpm", &img);
+	load_image(s, s->texture[3], s->map->south_texture, &img);
 	load_image(s, s->sub_texture[0], "textures/sans_1.xpm", &img);
 	load_image(s, s->sub_texture[1], "textures/sans_2.xpm", &img);
 	load_image(s, s->sub_texture[2], "textures/sans_3.xpm", &img);
@@ -111,9 +105,9 @@ void	init_struct(t_screen *s, t_map *map)
 	x = -1;
 	while (++x < SCREEN_H)
 		s->buf[x] = (int *)malloc(sizeof(int) * SCREEN_W);
-	s->texture = (int **)malloc(sizeof(int *) * 10);
+	s->texture = (int **)malloc(sizeof(int *) * TEX_NUM);
 	x = -1;
-	while (++x < 10)
+	while (++x < TEX_NUM)
 		s->texture[x] = (int *)malloc(sizeof(int) * (TEX_W * TEX_H));
 	s->z_buffer = (double *)malloc(sizeof(double) * SCREEN_W);
 	s->sub_texture = (int **)malloc(sizeof(int *) * 4);
