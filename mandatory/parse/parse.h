@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:13:23 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 05:09:45 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 15:56:18 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../cub3d.h"
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 
 typedef struct s_map	t_map;
 
