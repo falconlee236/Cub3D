@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 05:09:22 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 15:01:44 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 15:08:32 by isang-yun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_sprite(t_map *map)
 			add_sprite(map->map_start[0], map->map_start[1] + 1, map);
 		if (is_valid(map->map_start[0] - 1, map->map_start[1], map))
 			add_sprite(map->map_start[0] - 1, map->map_start[1], map);
-		 if (is_valid(map->map_start[0] + 1, map->map_start[1], map))
+		if (is_valid(map->map_start[0] + 1, map->map_start[1], map))
 			add_sprite(map->map_start[0] + 1, map->map_start[1], map);
 	}
 }
