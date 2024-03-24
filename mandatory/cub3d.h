@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isang-yun <isang-yun@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:23:36 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/24 15:17:16 by isang-yun        ###   ########.fr       */
+/*   Updated: 2024/03/24 15:56:32 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
-# include "./libft/libft.h"
-# include "./mlx/mlx.h"
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
 # include "./parse/parse.h"
 
 //SECTION - KEY MACRO

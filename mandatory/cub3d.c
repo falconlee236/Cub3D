@@ -6,16 +6,11 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:22:05 by sangylee          #+#    #+#             */
-/*   Updated: 2024/03/22 02:38:35 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 15:23:16 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	leak_check(void)
-{
-	system("leaks cub3D");
-}
 
 int	main_loop(t_screen *s)
 {
@@ -40,7 +35,6 @@ int	main(int argc, char **argv)
 	t_map		map;
 	t_screen	s;
 
-	atexit(leak_check);
 	init_map(argc, argv, &map);
 	init_struct(&s, &map);
 	mlx_loop_hook(s.mlx, &main_loop, &s);

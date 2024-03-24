@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_map.c                                          :+:      :+:    :+:   */
+/*   set_map_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:41:21 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 05:20:47 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 16:05:05 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "parse_bonus.h"
 
 static void	set_row(int fd, char *line, int height, t_map *map)
 {
@@ -31,6 +31,7 @@ static void	set_row(int fd, char *line, int height, t_map *map)
 			map->init_direction = line[idx];
 			map->map_start[0] = height;
 			map->map_start[1] = idx;
+			map->map[map->map_start[0]][map->map_start[1]] = 0;
 		}
 		else
 			close_fd_exit(fd);
@@ -74,16 +75,11 @@ void	init_map_value(t_map *map)
 	i = 0;
 	while (i < map->max_height)
 	{
-		map->map[i][0] = 1;
-		map->map[i][map->max_width - 1] = 1;
-		if (i == 0 || i == map->max_height - 1)
+		j = 0;
+		while (j < map->max_width)
 		{
-			j = 0;
-			while (j < map->max_width)
-			{
-				map->map[i][j] = 1;
-				j++;
-			}
+			map->map[i][j] = -1;
+			j++;
 		}
 		i++;
 	}
@@ -93,15 +89,15 @@ void	alloc_map(t_map *map)
 {
 	int	i;
 
-	map->map = (int **)ft_calloc(map->max_height, sizeof(int *));
-	map->map_is_visit = (int **)ft_calloc(map->max_height, sizeof(int *));
+	map->map = (int **)malloc(map->max_height * sizeof(int *));
+	map->map_is_visit = (int **)malloc(map->max_height * sizeof(int *));
 	if (!(map->map) || !(map->map))
 		exit_error("Allocation Error.");
 	i = 0;
 	while (i < map->max_height)
 	{
-		(map->map)[i] = (int *)ft_calloc(map->max_width, sizeof(int));
-		(map->map_is_visit)[i] = (int *)ft_calloc(map->max_width, sizeof(int));
+		(map->map)[i] = (int *)malloc(map->max_width * sizeof(int));
+		(map->map_is_visit)[i] = (int *)malloc(map->max_width * sizeof(int));
 		if (!(map->map)[i] || !(map->map_is_visit)[i])
 			exit_error("Allocation Error.");
 		i++;

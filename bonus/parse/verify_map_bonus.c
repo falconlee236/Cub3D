@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verify_map.c                                       :+:      :+:    :+:   */
+/*   verify_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:21:10 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 04:53:25 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 16:05:08 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "parse_bonus.h"
 
 static int	check_point(int newH, int newW, t_map *map)
 {
@@ -26,12 +26,10 @@ static int	check_point(int newH, int newW, t_map *map)
 static void	dfs_map(int curH, int curW, t_map *map)
 {
 	map->map_is_visit[curH][curW] = 1;
-	if (curH < 0 || curH >= (int)map->max_height
-		|| curW < 0 || curW >= (int)map->max_width
-		|| (map->map[curH][curW] != 0
-		&& map->map[curH][curW] != 1))
+	if (curH < 0 || curH >= map->max_height
+		|| curW < 0 || curW >= map->max_width
+		|| map->map[curH][curW] == -1)
 	{
-		printf("%d %d %d", curH, curW, map->map[curH][curW]);
 		exit_error("Invalid Map.");
 		return ;
 	}
@@ -53,10 +51,10 @@ void	verify_map(t_map *map)
 	if (map->map_start[0] < 0 || map->map_start[1] < 0)
 		exit_error("Inavlid Map Content.");
 	i = 0;
-	while (i < (int)map->max_height)
+	while (i < map->max_height)
 	{
 		j = 0;
-		while (j < (int)map->max_width)
+		while (j < map->max_width)
 		{
 			if (map->map[i][j] == 0 && !map->map_is_visit[i][j])
 				dfs_map(i, j, map);
