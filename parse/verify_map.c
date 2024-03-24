@@ -6,7 +6,7 @@
 /*   By: yonyoo <yonyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:21:10 by yonyoo            #+#    #+#             */
-/*   Updated: 2024/03/24 15:40:39 by yonyoo           ###   ########seoul.kr  */
+/*   Updated: 2024/03/24 15:47:52 by yonyoo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	dfs_map(int curH, int curW, t_map *map)
 		|| curW < 0 || curW >= map->max_width
 		|| map->map[curH][curW] == -1)
 	{
-		printf("%d %d %d\n", curH, curW, map->map[curH][curW]);
 		exit_error("Invalid Map.");
 		return ;
 	}
